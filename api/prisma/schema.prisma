@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid()) @db.Uuid
+  name     String
+  email    String @unique
+  password String
+
+  bankAccounts BankAccount[]
+  categories   Category[]
+  transactions Transaction[]
+
+  @@map("users")
+}
+
+enum BankAccountType {
+  CHECKING
+  INVESTMENT
+  CASH
+
+  @@map("bank_account_type")
+}
+
+model BankAccount {
+  id             String          @id @default(uuid()) @db.Uuid
+  userId         String          @map("user_id") @db.Uuid
+  name           String
+  initialBalance Float           @map("initial_balance")
+  color          String
+  type           BankAccountType
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@map("bank_accounts")
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+
+  @@map("transaction_type")
+}
+
+model Category {
+  id           String          @id @default(uuid()) @db.Uuid
+  userId       String          @map("user_id") @db.Uuid
+  name         String
+  icon         String
+  type         TransactionType
+  transactions Transaction[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("categories")
+}
+
+model Transaction {
+  id            String          @id @default(uuid()) @db.Uuid
+  userId        String          @map("user_id") @db.Uuid
+  bankAccountId String          @map("bank_account_id") @db.Uuid
+  categoryId    String?         @map("category_id") @db.Uuid
+  name          String
+  value         Float
+  date          DateTime
+  type          TransactionType
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bankAccount BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
+  category    Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@map("transactions")
+}
