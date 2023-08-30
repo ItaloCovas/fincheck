@@ -6,9 +6,9 @@ import { type Prisma } from '@prisma/client';
 export class CategoriesRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  // create(createUserDto: Prisma.UserCreateArgs) {
-  //   return this.prismaService.user.create(createUserDto);
-  // }
+  findFirst(findFirstDto: Prisma.CategoryFindFirstArgs) {
+    return this.prismaService.category.findFirst(findFirstDto);
+  }
 
   findMany(findManyDto: Prisma.CategoryFindManyArgs) {
     return this.prismaService.category.findMany(findManyDto);
