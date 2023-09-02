@@ -7,6 +7,8 @@ import {
   UploadedFile,
   ParseFilePipe,
   FileTypeValidator,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import { FilesService } from './files.service';
 import multerConfig from 'src/shared/config/multer-config';
@@ -32,7 +34,8 @@ export class FilesController {
   }
 
   @Delete(':fileKey')
-  remove(@Param('fileKey') fileKey: string) {
-    return this.filesService.remove(fileKey);
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async remove(@Param('fileKey') fileKey: string) {
+    return await this.filesService.remove(fileKey);
   }
 }
