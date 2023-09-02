@@ -54,11 +54,14 @@ model Category {
   userId       String          @map("user_id") @db.Uuid
   name         String
   icon         String
+  iconUrl      String?
+  iconKey      String?
   type         TransactionType
   transactions Transaction[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([name, userId])
   @@map("categories")
 }
 

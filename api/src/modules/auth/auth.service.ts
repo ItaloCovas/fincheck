@@ -67,7 +67,6 @@ export class AuthService {
               // Income
               { name: 'Salário', icon: 'salary', type: 'INCOME' },
               { name: 'Freelance', icon: 'freelance', type: 'INCOME' },
-              { name: 'Outro', icon: 'other', type: 'INCOME' },
 
               // Expense
               { name: 'Casa', icon: 'home', type: 'EXPENSE' },

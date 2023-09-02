@@ -7,6 +7,7 @@ import { AuthGuard } from './modules/auth/auth.guard';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { BankAccountsModule } from './modules/bank-accounts/bank-accounts.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
+import { FilesModule } from './modules/files/files.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
     CategoriesModule,
     BankAccountsModule,
     TransactionsModule,
+    FilesModule,
   ],
   controllers: [],
   providers: [
