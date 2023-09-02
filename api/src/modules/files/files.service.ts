@@ -19,16 +19,12 @@ export class FilesService {
   }
 
   async remove(fileKey: string) {
-    const deletedIcon = await this.s3
+    await this.s3
       .deleteObject({
         Bucket: process.env.BUCKET_NAME,
         Key: fileKey,
       })
       .promise();
-
-    if (Object.keys(deletedIcon).length === 0) {
-      throw new NotFoundException('Icon not found.');
-    }
 
     return null;
   }

@@ -1,13 +1,21 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CategoriesRepository } from 'src/shared/database/repositories/categories.repositories';
 import { CreateCategoryDto } from '../dto/create-category.dto';
 import { UpdateCategoryDto } from '../dto/update-category.dto';
 import { FilesService } from 'src/modules/files/files.service';
+import { ValidateCategoryOwnershipService } from './validate-category-ownership.service';
+
+import { isUUID } from 'class-validator';
 
 @Injectable()
 export class CategoriesService {
   constructor(
     private readonly categoriesRepo: CategoriesRepository,
+    private readonly validateCategoryOwnershipService: ValidateCategoryOwnershipService,
     private readonly filesService: FilesService,
   ) {}
 
@@ -46,15 +54,39 @@ export class CategoriesService {
     });
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} category`;
+  async getCategoryById(categoryId: string) {
+    if (!isUUID(categoryId)) {
+      throw new UnauthorizedException('Category must be valid.');
+    }
+
+    return this.categoriesRepo.findUnique({
+      where: {
+        id: categoryId,
+      },
+      select: {
+        name: true,
+        iconKey: true,
+      },
+    });
   }
 
   update(id: string, updateCategoryDto: UpdateCategoryDto) {
     return `This action updates a #${id} category`;
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} category`;
+  async remove(userId: string, categoryId: string) {
+    await this.validateCategoryOwnershipService.validate(userId, categoryId);
+
+    const category = await this.getCategoryById(categoryId);
+
+    await this.filesService.remove(category.iconKey);
+
+    await this.categoriesRepo.delete({
+      where: {
+        id: categoryId,
+      },
+    });
+
+    return null;
   }
 }

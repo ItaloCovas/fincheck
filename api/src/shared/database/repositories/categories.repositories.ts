@@ -14,7 +14,15 @@ export class CategoriesRepository {
     return this.prismaService.category.findFirst(findFirstDto);
   }
 
+  findUnique(findUniqueDto: Prisma.CategoryFindUniqueArgs) {
+    return this.prismaService.category.findUnique(findUniqueDto);
+  }
+
   findMany(findManyDto: Prisma.CategoryFindManyArgs) {
     return this.prismaService.category.findMany(findManyDto);
+  }
+
+  delete(deleteDto: Prisma.CategoryDeleteArgs) {
+    return this.prismaService.category.delete(deleteDto);
   }
 }
