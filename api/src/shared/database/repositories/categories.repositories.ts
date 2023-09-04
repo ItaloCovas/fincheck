@@ -10,6 +10,10 @@ export class CategoriesRepository {
     return this.prismaService.category.create(createDto);
   }
 
+  update(updateDto: Prisma.CategoryUpdateArgs) {
+    return this.prismaService.category.update(updateDto);
+  }
+
   findFirst(findFirstDto: Prisma.CategoryFindFirstArgs) {
     return this.prismaService.category.findFirst(findFirstDto);
   }

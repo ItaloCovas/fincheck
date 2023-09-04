@@ -44,12 +44,28 @@ export class CategoriesController {
     return this.categoriesService.findAllByUserId(userId);
   }
 
-  @Patch(':id')
+  @Patch(':categoryId')
+  @UseInterceptors(FileInterceptor('file', multerConfig))
   update(
-    @Param('id') id: string,
+    @ActiveUserId() userId: string,
+    @Param('categoryId') categoryId: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: /(jpg|jpeg|png|webp)$/ }),
+        ],
+        fileIsRequired: false,
+      }),
+    )
+    file: Express.MulterS3.File,
   ) {
-    return this.categoriesService.update(id, updateCategoryDto);
+    return this.categoriesService.update(
+      userId,
+      categoryId,
+      updateCategoryDto,
+      file,
+    );
   }
 
   @Delete(':id')

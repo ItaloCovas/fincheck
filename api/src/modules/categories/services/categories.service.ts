@@ -34,7 +34,7 @@ export class CategoriesService {
       throw new ConflictException('This category already exists.');
     }
 
-    const iconImg = await this.filesService.create(file);
+    const iconImg = this.filesService.create(file);
 
     return this.categoriesRepo.create({
       data: {
@@ -70,8 +70,51 @@ export class CategoriesService {
     });
   }
 
-  update(id: string, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(
+    userId: string,
+    categoryId: string,
+    updateCategoryDto: UpdateCategoryDto,
+    file: Express.MulterS3.File,
+  ) {
+    const { name, type } = updateCategoryDto;
+    console.log(updateCategoryDto);
+    let iconImg: Express.MulterS3.File;
+
+    await this.validateCategoryOwnershipService.validate(userId, categoryId);
+
+    if (file) {
+      const category = await this.categoriesRepo.findUnique({
+        where: {
+          id: categoryId,
+        },
+        select: {
+          iconKey: true,
+        },
+      });
+
+      await this.filesService.remove(category.iconKey);
+
+      iconImg = this.filesService.create(file);
+
+      return this.categoriesRepo.update({
+        where: { id: categoryId },
+        data: {
+          name,
+          type,
+          icon: iconImg.fieldname,
+          iconKey: iconImg.key,
+          iconUrl: iconImg.location,
+        },
+      });
+    } else {
+      return this.categoriesRepo.update({
+        where: { id: categoryId },
+        data: {
+          name,
+          type,
+        },
+      });
+    }
   }
 
   async remove(userId: string, categoryId: string) {
