@@ -77,7 +77,6 @@ export class CategoriesService {
     file: Express.MulterS3.File,
   ) {
     const { name, type } = updateCategoryDto;
-    console.log(updateCategoryDto);
     let iconImg: Express.MulterS3.File;
 
     await this.validateCategoryOwnershipService.validate(userId, categoryId);
