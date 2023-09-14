@@ -12,7 +12,7 @@ import {
   FileTypeValidator,
 } from '@nestjs/common';
 import { CategoriesService } from './services/categories.service';
-import { ActiveUserId } from 'src/shared/decorators/activeUserId';
+import { ActiveUserId } from 'src/shared/decorators/ActiveUserId';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
