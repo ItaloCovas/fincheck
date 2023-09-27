@@ -5,6 +5,7 @@ import { authService } from '../../../app/services/authService';
 import { useMutation } from '@tanstack/react-query';
 import { SignUpDTO } from '../../../app/services/authService/signup';
 import toast from 'react-hot-toast';
+import { useAuth } from '../../../app/hooks/useAuth';
 
 const schema = z.object({
   name: z.string().nonempty('Nome é obrigatório'),
@@ -36,10 +37,15 @@ export function useRegisterController() {
     }
   });
 
+  const { signIn } = useAuth();
+
   const handleSubmit = hookFormSubmit(async (data) => {
     // With those validations above, here its already validated (success case)
     try {
       const { accessToken } = await mutateAsync(data);
+
+      signIn(accessToken);
+      toast.success('Usuário criado com sucesso.');
     } catch {
       toast.error('Ocorreu um erro ao criar a sua conta.');
     }
