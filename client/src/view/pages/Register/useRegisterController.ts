@@ -45,7 +45,9 @@ export function useRegisterController() {
       const { accessToken } = await mutateAsync(data);
 
       signIn(accessToken);
-      toast.success('Usuário criado com sucesso.');
+      setTimeout(() => {
+        toast.success('Usuário criado com sucesso.');
+      }, 100);
     } catch {
       toast.error('Ocorreu um erro ao criar a sua conta.');
     }

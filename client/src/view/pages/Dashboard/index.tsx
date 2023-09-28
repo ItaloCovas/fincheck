@@ -1,9 +1,8 @@
 import { useAuth } from '../../../app/hooks/useAuth';
-import { Button } from '../../components/Button';
 import { Logo } from '../../components/Logo';
 import { UserMenu } from '../../components/UserMenu';
 import { Accounts } from './components/Accounts';
-import { Transactions } from './components/Transactions';
+import { Transactions } from './components/Transactions/index.tsx';
 
 export function Dashboard() {
   const { signOut } = useAuth();
