@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { cn } from '../../app/utils/cn';
+import { cn } from '../../shared/utils/cn';
 import { Spinner } from './Spinner';
 
 interface ButtonProps extends ComponentProps<'button'> {

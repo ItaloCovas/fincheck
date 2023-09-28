@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Router } from './router';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from './app/contexts/AuthContext';
+import { AuthProvider } from './shared/contexts/AuthContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {

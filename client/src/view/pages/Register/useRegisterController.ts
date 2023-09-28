@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { authService } from '../../../app/services/authService';
+import { authService } from '../../../shared/services/authService';
 import { useMutation } from '@tanstack/react-query';
-import { SignUpDTO } from '../../../app/services/authService/signup';
+import { SignUpDTO } from '../../../shared/services/authService/signup';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../../app/hooks/useAuth';
+import { useAuth } from '../../../shared/hooks/useAuth';
 
 const schema = z.object({
   name: z.string().nonempty('Nome é obrigatório'),
