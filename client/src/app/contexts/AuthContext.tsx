@@ -3,6 +3,7 @@ import { localStorageKeys } from '../config/localStorageKeys';
 import { useQuery } from '@tanstack/react-query';
 import { usersService } from '../services/usersService';
 import toast from 'react-hot-toast';
+import { SplashScreen } from '../../view/components/SplashScreen';
 
 interface AuthContextProps {
   signedIn: boolean;
@@ -33,13 +34,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const signOut = useCallback(() => {
     localStorage.removeItem(localStorageKeys.ACCESS_TOKEN);
+    remove();
     setSignedIn(false);
   }, []);
 
-  const { isError } = useQuery({
+  const { isError, isFetching, isSuccess, remove } = useQuery({
     queryKey: ['users', 'me'],
     queryFn: () => usersService.me(),
-    enabled: signedIn
+    enabled: signedIn,
+    staleTime: Infinity
   });
 
   useEffect(() => {
@@ -49,9 +52,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [isError, signOut]);
 
+  if (isFetching) {
+    return <SplashScreen isLoading={isFetching} />;
+  }
+
   return (
-    <AuthContext.Provider value={{ signedIn, signIn, signOut }}>
-      {children}
+    // isSuccess to avoid blinks
+    <AuthContext.Provider
+      value={{ signedIn: isSuccess && signedIn, signIn, signOut }}
+    >
+      <SplashScreen isLoading={isFetching} />
+      {!isFetching && children}
     </AuthContext.Provider>
   );
 }
