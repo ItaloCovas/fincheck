@@ -1,4 +1,4 @@
-import { iconsMap } from "./iconsMap";
+import { iconsMap } from './iconsMap';
 
 interface CategoryIconProps {
   type: 'income' | 'expense';
@@ -6,9 +6,10 @@ interface CategoryIconProps {
 }
 
 export function CategoryIcon({ type, category }: CategoryIconProps) {
-  const Icon = iconsMap[type][
-    category as keyof (typeof iconsMap.expense | typeof iconsMap.income)
-  ] ?? iconsMap[type].default;
+  const Icon =
+    iconsMap[type][
+      category as keyof (typeof iconsMap.expense | typeof iconsMap.income)
+    ] ?? iconsMap[type].default;
 
-  return <Icon />
+  return <Icon />;
 }

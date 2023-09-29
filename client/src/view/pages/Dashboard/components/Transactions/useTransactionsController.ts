@@ -8,6 +8,6 @@ export function useTransactionsController() {
     toggleValueVisibility,
     isLoading: false,
     isInitialLoading: false,
-    transactions: []
+    transactions: [1]
   };
 }
