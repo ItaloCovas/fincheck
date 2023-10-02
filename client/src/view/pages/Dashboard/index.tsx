@@ -1,4 +1,3 @@
-// import { useAuth } from '../../../app/hooks/useAuth';
 import { Logo } from '../../components/Logo';
 import { UserMenu } from '../../components/UserMenu';
 import { DashboardProvider } from './DashboardContext/index.tsx';
@@ -7,8 +6,6 @@ import { Fab } from './components/Fab/index.tsx';
 import { Transactions } from './components/Transactions/index.tsx';
 
 export function Dashboard() {
-  // const { signOut } = useAuth();
-
   return (
     <DashboardProvider>
       <div className="h-full w-full p-4 flex flex-col gap-4 md:px-8 md:pb-8 md:pt-6">

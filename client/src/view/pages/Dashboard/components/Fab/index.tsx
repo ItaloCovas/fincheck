@@ -18,10 +18,12 @@ export function Fab() {
             <CategoryIcon type="expense" />
             Nova Despesa
           </DropdownMenu.Item>
+
           <DropdownMenu.Item className="gap-2">
             <CategoryIcon type="income" />
             Nova Receita
           </DropdownMenu.Item>
+
           <DropdownMenu.Item className="gap-2">
             <BankAccountIcon />
             Nova Conta
