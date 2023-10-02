@@ -10,7 +10,8 @@ interface SliderProps {
 
 export function useAccountsController() {
   const windowWidth = useWindowWidth();
-  const { areValuesVisible, toggleValueVisibility } = useDashboard();
+  const { areValuesVisible, toggleValueVisibility, openNewAccountModal } =
+    useDashboard();
 
   const [sliderState, setSliderState] = useState<SliderProps>({
     isBeginning: false,
@@ -23,6 +24,7 @@ export function useAccountsController() {
     windowWidth,
     areValuesVisible,
     toggleValueVisibility,
+    openNewAccountModal,
     isLoading: false,
     accounts: [1]
   };
