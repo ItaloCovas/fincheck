@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { authService } from '../../../shared/services/authService';
-import { SignInDTO } from '../../../shared/services/authService/signin';
+import { SignInParams } from '../../../shared/services/authService/signin';
 import toast from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
 import { useAuth } from '../../../shared/hooks/useAuth';
@@ -31,7 +31,7 @@ export function useLoginController() {
 
   const { mutateAsync, isLoading } = useMutation({
     mutationKey: ['signup'],
-    mutationFn: async (data: SignInDTO) => {
+    mutationFn: async (data: SignInParams) => {
       return authService.signIn(data);
     }
   });

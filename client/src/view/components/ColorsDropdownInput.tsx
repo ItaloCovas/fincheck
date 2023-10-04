@@ -8,6 +8,10 @@ interface ColorsDropdownInputProps {
   error?: string;
 
   className?: string;
+
+  onChange(value: string): void;
+
+  value?: string;
 }
 
 type ColorProps = {
@@ -34,11 +38,20 @@ const colors: ColorProps[] = [
 
 export function ColorsDropdownInput({
   error,
-  className
+  className,
+  onChange,
+  value
 }: ColorsDropdownInputProps) {
-  const [selectedColor, setSelectedColor] = useState<null | ColorProps>(null);
+  const [selectedColor, setSelectedColor] = useState<null | ColorProps>(() => {
+    if (!value) {
+      return null;
+    }
+
+    return colors.find((c) => c.color === value) ?? null;
+  });
   function handleSelect(color: ColorProps) {
     setSelectedColor(color);
+    onChange?.(color.color);
   }
 
   return (

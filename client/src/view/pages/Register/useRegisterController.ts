@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { authService } from '../../../shared/services/authService';
 import { useMutation } from '@tanstack/react-query';
-import { SignUpDTO } from '../../../shared/services/authService/signup';
+import { SignUpParams } from '../../../shared/services/authService/signup';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../../shared/hooks/useAuth';
 
@@ -32,7 +32,7 @@ export function useRegisterController() {
 
   const { mutateAsync, isLoading } = useMutation({
     mutationKey: ['signup'],
-    mutationFn: async (data: SignUpDTO) => {
+    mutationFn: async (data: SignUpParams) => {
       return authService.signUp(data);
     }
   });
