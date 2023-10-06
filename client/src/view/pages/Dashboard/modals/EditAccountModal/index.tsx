@@ -5,7 +5,9 @@ import { Input } from '../../../../components/Input';
 import { InputCurrency } from '../../../../components/InputCurrency';
 import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
-import { useNewAccountModalController } from './useNewAccountModalController';
+import { useEditAccountModalController } from './useEditAccountModalController';
+import { TrashIcon } from '../../../../components/icons/TrashIcon';
+import { DeleteModal } from '../../../../components/DeleteModal';
 
 export function EditAccountModal() {
   const {
@@ -15,14 +17,37 @@ export function EditAccountModal() {
     handleSubmit,
     register,
     control,
-    isLoading
-  } = useNewAccountModalController();
+    isLoading,
+    isDeleteModalOpen,
+    handleCloseDeleteModal,
+    handleOpenDeleteModal,
+    handleDeleteAccount,
+    isLoadingRemove
+  } = useEditAccountModalController();
+
+  if (isDeleteModalOpen) {
+    return (
+      <DeleteModal
+        title="Tem certeza de que deseja excluir sua conta?"
+        description="Ao excluir a conta, também serão excluídos todos os registros de
+      receita e despesa da relacionados a mesma."
+        isLoading={isLoadingRemove}
+        onConfirm={handleDeleteAccount}
+        onClose={handleCloseDeleteModal}
+      />
+    );
+  }
 
   return (
     <Modal
       title="Editar Conta"
       open={isEditAccountModalOpen}
       onClose={closeEditAccountModal}
+      rightAction={
+        <button onClick={handleOpenDeleteModal}>
+          <TrashIcon className="text-red-900 w-6 h-6" />
+        </button>
+      }
     >
       <form onSubmit={handleSubmit}>
         <div>
@@ -36,10 +61,11 @@ export function EditAccountModal() {
               control={control}
               name="initialBalance"
               defaultValue="0"
-              render={({ field: { onChange } }) => (
+              render={({ field: { onChange, value } }) => (
                 <InputCurrency
                   error={errors.initialBalance?.message}
                   onChange={onChange}
+                  value={value}
                 />
               )}
             />
@@ -97,7 +123,7 @@ export function EditAccountModal() {
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Criar
+          Salvar
         </Button>
       </form>
     </Modal>

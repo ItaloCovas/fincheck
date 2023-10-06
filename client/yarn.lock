@@ -2096,6 +2096,11 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
+react-currency-input-field@^3.6.11:
+  version "3.6.11"
+  resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.6.11.tgz#5e0c94b85c78c51ddfa33e4b60608accfa123366"
+  integrity sha512-M9vOx1eaioSaYWirm7W2WSBi4bpLg+LK4Gf7C1kNhy6MvoSoOzd0mYZPxA78OC9UBIQ2nM080Wu9D1CwTY6n3w==
+
 react-day-picker@^8.8.2:
   version "8.8.2"
   resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-8.8.2.tgz#1f778ad73fecf44105d2a02f5d15ec0eaa1afcc1"

@@ -35,6 +35,8 @@ export function useNewAccountModalController() {
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
+      console.log(data);
+      console.log(currencyStringToNumber(data.initialBalance));
       await mutateAsync({
         ...data,
         initialBalance: currencyStringToNumber(data.initialBalance)
@@ -45,7 +47,7 @@ export function useNewAccountModalController() {
       closeNewAccountModal();
       reset();
     } catch {
-      toast.error('Erro ao cadastrar a conta!');
+      toast.error('Erro ao cadastrar a conta.');
     }
   });
 

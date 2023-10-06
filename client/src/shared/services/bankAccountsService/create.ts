@@ -1,6 +1,6 @@
 import { httpClient } from '../httpClient';
 
-export interface BankAccountParams {
+export interface CreateBankAccountParams {
   name: string;
 
   initialBalance: number;
@@ -10,7 +10,7 @@ export interface BankAccountParams {
   type: 'CASH' | 'INVESTMENT' | 'CHECKING';
 }
 
-export async function create(bankAccountData: BankAccountParams) {
+export async function create(bankAccountData: CreateBankAccountParams) {
   const { data } = await httpClient.post('/bank-accounts', bankAccountData);
 
   return data;
