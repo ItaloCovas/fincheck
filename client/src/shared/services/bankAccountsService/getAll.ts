@@ -1,24 +1,10 @@
+import { BankAccount } from '../../entities/bankAccount';
 import { httpClient } from '../httpClient';
 
-interface BankAccountsResponse {
-  id: string;
-
-  userId: string;
-
-  name: string;
-
-  initialBalance: number;
-
-  type: 'CASH' | 'INVESTMENT' | 'CHECKING';
-
-  color: string;
-
-  currentBalance: number;
-}
+type BankAccountsResponse = Array<BankAccount>;
 
 export async function getAll() {
-  const { data } =
-    await httpClient.get<BankAccountsResponse[]>('/bank-accounts');
+  const { data } = await httpClient.get<BankAccountsResponse>('/bank-accounts');
 
   return data;
 }

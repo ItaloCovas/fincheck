@@ -9,9 +9,23 @@ interface DatePickerInputProps {
   error?: string;
 
   className?: string;
+
+  value?: Date;
+
+  onChange?(date: Date): void;
 }
-export function DatePickerInput({ error, className }: DatePickerInputProps) {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+export function DatePickerInput({
+  error,
+  className,
+  value,
+  onChange
+}: DatePickerInputProps) {
+  const [selectedDate, setSelectedDate] = useState(value ?? new Date());
+
+  function handleChangeDate(date: Date) {
+    setSelectedDate(date);
+    onChange?.(date);
+  }
 
   return (
     <div>
@@ -33,10 +47,7 @@ export function DatePickerInput({ error, className }: DatePickerInputProps) {
         </Popover.Trigger>
 
         <Popover.Content>
-          <DatePicker
-            value={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-          />
+          <DatePicker value={selectedDate} onChange={handleChangeDate} />
         </Popover.Content>
       </Popover.Root>
       {error && (

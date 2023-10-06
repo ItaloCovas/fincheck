@@ -36,8 +36,9 @@ export function NewAccountModal() {
               control={control}
               name="initialBalance"
               defaultValue="0"
-              render={({ field: { onChange } }) => (
+              render={({ field: { onChange, value } }) => (
                 <InputCurrency
+                  value={value}
                   error={errors.initialBalance?.message}
                   onChange={onChange}
                 />
