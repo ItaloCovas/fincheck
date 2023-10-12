@@ -12,8 +12,8 @@ export interface EditBankAccountParams {
   type: 'CASH' | 'INVESTMENT' | 'CHECKING';
 }
 
-export async function update({ id, ...params }: EditBankAccountParams) {
-  const { data } = await httpClient.put(`/bank-accounts/${id}`, params);
+export async function update({ id, ...bodyParams }: EditBankAccountParams) {
+  const { data } = await httpClient.put(`/bank-accounts/${id}`, bodyParams);
 
   return data;
 }
