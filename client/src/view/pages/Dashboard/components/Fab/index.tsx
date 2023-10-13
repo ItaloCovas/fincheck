@@ -10,7 +10,7 @@ export function Fab() {
     useDashboard();
 
   return (
-    <div className="fixed right-4 bottom-4">
+    <div className="fixed right-4 bottom-4 z-50">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
           <button className=" text-white h-12 w-12 bg-teal-900 rounded-full flex items-center justify-center">

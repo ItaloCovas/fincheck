@@ -17,7 +17,6 @@ export interface EditTransactionParams {
 }
 
 export async function update({ id, ...params }: EditTransactionParams) {
-  console.log(params, 'params');
   const { data } = await httpClient.put(`/transactions/${id}`, params);
 
   return data;

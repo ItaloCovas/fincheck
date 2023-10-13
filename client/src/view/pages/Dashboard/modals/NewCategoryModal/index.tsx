@@ -33,8 +33,21 @@ export function NewCategoryModal() {
           <Controller
             name="file"
             control={control}
-            defaultValue={''} // You can set the default value to null
-            render={({ field }) => <input type="file" {...field} />}
+            render={({ field }) => (
+              <Input
+                type="file"
+                error={errors.file?.message as string}
+                onChange={(event) => {
+                  if (
+                    event.target &&
+                    event.target.files &&
+                    event.target.files.length > 0
+                  ) {
+                    field.onChange(event.target.files[0]);
+                  }
+                }}
+              />
+            )}
           />
           <Controller
             control={control}

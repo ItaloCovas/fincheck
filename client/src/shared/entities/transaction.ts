@@ -1,3 +1,5 @@
+import { Category } from './category';
+
 export interface Transaction {
   id: string;
 
@@ -13,9 +15,5 @@ export interface Transaction {
 
   type: 'INCOME' | 'EXPENSE';
 
-  category?: {
-    id: string;
-    name: string;
-    icon: string;
-  };
+  category?: Category;
 }

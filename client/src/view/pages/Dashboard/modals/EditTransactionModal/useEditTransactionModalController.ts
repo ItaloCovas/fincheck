@@ -53,7 +53,6 @@ export function useEditTransactionModalController(
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleSubmit = hookFormSubmit(async (data) => {
-    console.log(data);
     try {
       await updateTransaction({
         ...data,
