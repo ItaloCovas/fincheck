@@ -3,7 +3,6 @@ import { transactionsService } from '../services/transactionsService';
 import { TransactionsFilters } from '../services/transactionsService/getAll';
 
 export function useTransactions(filters: TransactionsFilters) {
-  console.log(filters, 'rqfilters');
   const { data, isFetching, isInitialLoading, refetch } = useQuery({
     queryKey: ['transactions'],
     queryFn: () => transactionsService.getAll(filters)

@@ -3,8 +3,8 @@ import { useBankAccounts } from '../../../../../../shared/hooks/useBankAccounts'
 
 export function useFiltersModalController() {
   const [selectedBankAccountId, setSelectedBankAccountId] = useState<
-    null | string
-  >(null);
+    undefined | string
+  >(undefined);
 
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
@@ -12,7 +12,7 @@ export function useFiltersModalController() {
 
   function handleSelectBankAccount(bankAccountId: string) {
     setSelectedBankAccountId((prevState) =>
-      prevState === bankAccountId ? null : bankAccountId
+      prevState === bankAccountId ? undefined : bankAccountId
     );
   }
 

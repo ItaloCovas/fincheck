@@ -4,12 +4,16 @@ import { useQuery } from '@tanstack/react-query';
 import { usersService } from '../services/usersService';
 import toast from 'react-hot-toast';
 import { SplashScreen } from '../../view/components/SplashScreen';
+import { User } from '../entities/user';
 
 interface AuthContextProps {
   signedIn: boolean;
 
   signOut(): void;
+
   signIn(accessToken: string): void;
+
+  user: User | undefined;
 }
 
 interface AuthProviderProps {
@@ -38,7 +42,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setSignedIn(false);
   }, []);
 
-  const { isError, isFetching, isSuccess, remove } = useQuery({
+  const { isError, isFetching, isSuccess, remove, data } = useQuery({
     queryKey: ['users', 'me'],
     queryFn: () => usersService.me(),
     enabled: signedIn,
@@ -59,7 +63,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     // isSuccess to avoid blinks
     <AuthContext.Provider
-      value={{ signedIn: isSuccess && signedIn, signIn, signOut }}
+      value={{ signedIn: isSuccess && signedIn, signIn, signOut, user: data }}
     >
       <SplashScreen isLoading={isFetching} />
       {!isFetching && children}

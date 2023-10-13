@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react';
 import { useDashboard } from '../../DashboardContext/useDashboard';
 import { useTransactions } from '../../../../../shared/hooks/useTransactions';
 import { TransactionsFilters } from '../../../../../shared/services/transactionsService/getAll';
+import { Transaction } from '../../../../../shared/entities/transaction';
 export function useTransactionsController() {
   const { areValuesVisible, toggleValueVisibility } = useDashboard();
 
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
+  const [isEditTransactionsModalOpen, setIsEditTransactionsModalOpen] =
+    useState(false);
+  const [transactionBeingEdited, setTransactionBeingEdited] =
+    useState<null | Transaction>(null);
 
   const [filters, setFilters] = useState<TransactionsFilters>({
     month: new Date().getMonth(),
@@ -32,12 +37,34 @@ export function useTransactionsController() {
     };
   }
 
+  function handleApplyFilters({
+    bankAccountId,
+    year
+  }: {
+    bankAccountId: string | undefined;
+    year: number;
+  }) {
+    handleChangeFilters('bankAccountId')(bankAccountId);
+    handleChangeFilters('year')(year);
+    setIsFiltersModalOpen(false);
+  }
+
   function handleOpenFiltersModal() {
     setIsFiltersModalOpen(true);
   }
 
   function handleCloseFiltersModal() {
     setIsFiltersModalOpen(false);
+  }
+
+  function handleOpenEditTransactionsModal(transaction: Transaction) {
+    setIsEditTransactionsModalOpen(true);
+    setTransactionBeingEdited(transaction);
+  }
+
+  function handleCloseEditTransactionsModal() {
+    setIsEditTransactionsModalOpen(false);
+    setTransactionBeingEdited(null);
   }
 
   return {
@@ -51,6 +78,11 @@ export function useTransactionsController() {
     isFiltersModalOpen,
     filters,
     setFilters,
-    handleChangeFilters
+    handleChangeFilters,
+    handleApplyFilters,
+    isEditTransactionsModalOpen,
+    transactionBeingEdited,
+    handleOpenEditTransactionsModal,
+    handleCloseEditTransactionsModal
   };
 }

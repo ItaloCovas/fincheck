@@ -1,6 +1,10 @@
 export interface Transaction {
   id: string;
 
+  categoryId: string;
+
+  bankAccountId: string;
+
   name: string;
 
   value: number;

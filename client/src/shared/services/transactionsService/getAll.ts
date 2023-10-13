@@ -18,7 +18,8 @@ export async function getAll(filters: TransactionsFilters) {
     params: {
       month: filters.month,
       year: filters.year,
-      type: filters.type
+      type: filters.type,
+      bankAccountId: filters.bankAccountId
     }
   });
 

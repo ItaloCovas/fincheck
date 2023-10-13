@@ -3,6 +3,10 @@ import { httpClient } from '../httpClient';
 export interface EditTransactionParams {
   id: string;
 
+  bankAccountId: string;
+
+  categoryId: string;
+
   name: string;
 
   value: number;
@@ -12,8 +16,9 @@ export interface EditTransactionParams {
   type: 'INCOME' | 'EXPENSE';
 }
 
-export async function update({ id, ...bodyParams }: EditTransactionParams) {
-  const { data } = await httpClient.put(`/transactions/${id}`, bodyParams);
+export async function update({ id, ...params }: EditTransactionParams) {
+  console.log(params, 'params');
+  const { data } = await httpClient.put(`/transactions/${id}`, params);
 
   return data;
 }

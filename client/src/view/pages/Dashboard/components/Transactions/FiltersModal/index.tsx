@@ -8,9 +8,18 @@ interface FiltersModalProps {
   open: boolean;
 
   onClose(): void;
+
+  onApplyFilters(filters: {
+    bankAccountId: string | undefined;
+    year: number;
+  }): void;
 }
 
-export function FiltersModal({ open, onClose }: FiltersModalProps) {
+export function FiltersModal({
+  open,
+  onClose,
+  onApplyFilters
+}: FiltersModalProps) {
   const {
     handleSelectBankAccount,
     selectedBankAccountId,
@@ -68,7 +77,17 @@ export function FiltersModal({ open, onClose }: FiltersModalProps) {
         </button>
       </div>
 
-      <Button className="w-full mt-10">Aplicar Filtros</Button>
+      <Button
+        className="w-full mt-10"
+        onClick={() =>
+          onApplyFilters({
+            bankAccountId: selectedBankAccountId,
+            year: selectedYear
+          })
+        }
+      >
+        Aplicar Filtros
+      </Button>
     </Modal>
   );
 }
