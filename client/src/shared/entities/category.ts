@@ -7,5 +7,9 @@ export interface Category {
 
   icon: string;
 
+  iconUrl?: string;
+
+  iconKey?: string;
+
   type: 'INCOME' | 'EXPENSE';
 }

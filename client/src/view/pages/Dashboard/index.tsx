@@ -9,6 +9,7 @@ import { Fab } from './components/Fab/index.tsx';
 import { Transactions } from './components/Transactions/index.tsx';
 import { EditAccountModal } from './modals/EditAccountModal/index.tsx';
 import { NewAccountModal } from './modals/NewAccountModal/index.tsx';
+import { NewCategoryModal } from './modals/NewCategoryModal/index.tsx';
 import { NewTransactionModal } from './modals/NewTransactionModal/index.tsx';
 
 export function Dashboard() {
@@ -33,6 +34,7 @@ export function Dashboard() {
             <Fab />
             <NewAccountModal />
             <NewTransactionModal />
+            <NewCategoryModal />
             {accountBeingEdited && <EditAccountModal />}
           </div>
         )}

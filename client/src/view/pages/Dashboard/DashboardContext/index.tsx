@@ -10,6 +10,8 @@ interface DashboardContextProps {
 
   isEditAccountModalOpen: boolean;
 
+  isNewCategoryModalOpen: boolean;
+
   accountBeingEdited: BankAccount | null;
 
   newTransactionType: 'INCOME' | 'EXPENSE' | null;
@@ -27,6 +29,10 @@ interface DashboardContextProps {
   openEditAccountModal(bankAccount: BankAccount): void;
 
   closeEditAccountModal(): void;
+
+  openNewCategoryModal(): void;
+
+  closeNewCategoryModal(): void;
 }
 
 interface DashboardProviderProps {
@@ -38,6 +44,7 @@ export const DashboardContext = createContext({} as DashboardContextProps);
 export function DashboardProvider({ children }: DashboardProviderProps) {
   const [areValuesVisible, setAreValuesVisible] = useState(true);
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [isNewCategoryModalOpen, setIsNewCategoryModalOpen] = useState(false);
   const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(false);
   const [accountBeingEdited, setAccountBeingEdited] =
     useState<BankAccount | null>(null);
@@ -79,6 +86,14 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
     setIsNewTransactionModalOpen(false);
   }, []);
 
+  const openNewCategoryModal = useCallback(() => {
+    setIsNewCategoryModalOpen(true);
+  }, []);
+
+  const closeNewCategoryModal = useCallback(() => {
+    setIsNewCategoryModalOpen(false);
+  }, []);
+
   return (
     <DashboardContext.Provider
       value={{
@@ -86,12 +101,15 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
         toggleValueVisibility,
         isNewAccountModalOpen,
         isNewTransactionModalOpen,
+        isNewCategoryModalOpen,
         openNewAccountModal,
         closeNewAccountModal,
         openNewTransactionModal,
         closeNewTransactionModal,
         openEditAccountModal,
         closeEditAccountModal,
+        openNewCategoryModal,
+        closeNewCategoryModal,
         newTransactionType,
         isEditAccountModalOpen,
         accountBeingEdited

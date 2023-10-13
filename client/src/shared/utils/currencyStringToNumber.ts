@@ -4,7 +4,7 @@ export function currencyStringToNumber(value: string | number) {
   }
 
   // Using RegExp for better browser compatibility. replaceAll is not with good compatibility today.
-  const sanitizedString = value.replace(/\./g, '').replace(',', '.');
+  const sanitizedString = value!.replace(/\./g, ',').replace(',', '.');
 
   return Number(sanitizedString);
 }
