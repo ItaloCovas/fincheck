@@ -4,22 +4,26 @@ import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import { useEditCategoryModalController } from './useEditCategoryModalController';
 import { Button } from '../../../../components/Button';
+import { Category } from '../../../../../shared/entities/category';
 
 interface EditCategoryModalProps {
   isModalOpen: boolean;
 
   onClose(): void;
+
+  category: Category | null;
 }
 
 export function EditCategoryModal({
   isModalOpen,
-  onClose
+  onClose,
+  category
 }: EditCategoryModalProps) {
   const { control, handleSubmit, errors, register, isLoading } =
-    useEditCategoryModalController();
+    useEditCategoryModalController(category, onClose);
 
   return (
-    <Modal title="Nova Categoria" open={isModalOpen} onClose={onClose}>
+    <Modal title="Editar Categoria" open={isModalOpen} onClose={onClose}>
       <form onSubmit={handleSubmit}>
         <div className="mt-10 flex flex-col gap-4">
           <Input
@@ -72,7 +76,7 @@ export function EditCategoryModal({
           />
         </div>
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Criar
+          Salvar
         </Button>
       </form>
     </Modal>

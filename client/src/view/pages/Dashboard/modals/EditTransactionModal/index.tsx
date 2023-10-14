@@ -9,6 +9,7 @@ import { Button } from '../../../../components/Button';
 import { Transaction } from '../../../../../shared/entities/transaction';
 import { DeleteModal } from '../../../../components/DeleteModal';
 import { TrashIcon } from '../../../../components/icons/TrashIcon';
+import { EditCategoryModal } from '../EditCategoryModal';
 
 interface EditTransactionModalProps {
   isModalOpen: boolean;
@@ -35,14 +36,12 @@ export function EditTransactionModal({
     isLoadingRemove,
     handleDeleteTransaction,
     handleCloseDeleteModal,
-    handleOpenDeleteModal
+    handleOpenDeleteModal,
+    categoryBeingEdited,
+    isEditCategoriesModalOpen,
+    handleCloseEditCategoriesModal,
+    handleOpenEditCategoriesModal
   } = useEditTransactionModalController(transaction, onClose);
-
-  // const {
-  //   categoryBeingEdited,
-  //   isEditCategoriesModalOpen,
-  //   handleCloseEditCategoriesModal
-  // } = useEditCategoryModalController();
 
   const isExpense = transaction?.type === 'EXPENSE';
 
@@ -59,15 +58,15 @@ export function EditTransactionModal({
     );
   }
 
-  // if (categoryBeingEdited) {
-  //   return (
-  //     <EditCategoryModal
-  //       isModalOpen={isEditCategoriesModalOpen}
-  //       onClose={handleCloseEditCategoriesModal}
-  //       category={categoryBeingEdited}
-  //     />
-  //   );
-  // }
+  if (categoryBeingEdited) {
+    return (
+      <EditCategoryModal
+        isModalOpen={isEditCategoriesModalOpen}
+        onClose={handleCloseEditCategoriesModal}
+        category={categoryBeingEdited}
+      />
+    );
+  }
 
   return (
     <Modal
@@ -119,11 +118,13 @@ export function EditTransactionModal({
                 onChange={onChange}
                 placeholder="Categoria"
                 isCategory
+                handleOpenEditCategoriesModal={handleOpenEditCategoriesModal}
                 value={value}
                 error={errors.categoryId?.message}
                 options={categories.map((category) => ({
                   value: category.id,
-                  label: category.name
+                  label: category.name,
+                  category: category
                 }))}
               />
             )}

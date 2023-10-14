@@ -15,8 +15,15 @@ export interface EditCategoryParams {
 
   type: 'INCOME' | 'EXPENSE';
 }
-export async function update({ id, ...params }: EditCategoryParams | FormData) {
-  const { data } = await httpClient.put(`/categories/${id}`, params);
+
+export async function update(params: EditCategoryParams | FormData) {
+  if (params instanceof FormData && params.has('id')) {
+    return;
+  }
+
+  const { id, ...restParams } = params as EditCategoryParams;
+
+  const { data } = await httpClient.patch(`/categories/${id}`, restParams);
 
   return data;
 }

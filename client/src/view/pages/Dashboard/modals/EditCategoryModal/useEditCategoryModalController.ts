@@ -3,7 +3,10 @@ import { useDashboard } from '../../DashboardContext/useDashboard';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Category } from '../../../../../shared/entities/category';
-import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { categoriesService } from '../../../../../shared/services/categoriesService';
+import { useAuth } from '../../../../../shared/hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const MAX_FILE_SIZE = 500000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -28,7 +31,10 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function useEditCategoryModalController() {
+export function useEditCategoryModalController(
+  category: Category | null,
+  onClose: () => void
+) {
   const { isNewCategoryModalOpen, closeNewCategoryModal } = useDashboard();
 
   const {
@@ -40,51 +46,36 @@ export function useEditCategoryModalController() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: '',
-      file: undefined
+      name: category?.name,
+      file: category?.icon,
+      type: category?.type
     }
   });
 
-  // const queryClient = useQueryClient();
-  // const { isLoading, mutateAsync } = useMutation(categoriesService.update);
-  // const { user } = useAuth();
-
-  const [isEditCategoriesModalOpen, setIsEditCategoriesModalOpen] =
-    useState(false);
-
-  const [categoryBeingEdited, setCategoryBeingEdited] =
-    useState<null | Category>(null);
+  const queryClient = useQueryClient();
+  const { isLoading, mutateAsync } = useMutation(categoriesService.update);
+  const { user } = useAuth();
 
   const handleSubmit = hookFormSubmit(async (data) => {
     console.log(data);
-    // try {
-    //   const formData = new FormData();
-    //   formData.append('file', data.file);
-    //   formData.append('icon', data.file.name);
-    //   formData.append('userId', user?.id as string);
-    //   // formData.append('id', data?.id as string);
-    //   formData.append('name', data.name);
-    //   formData.append('type', data.type);
-    //   await mutateAsync(formData);
-    //   queryClient.invalidateQueries({ queryKey: ['categories'] });
-    //   toast.success('Categoria cadastrada com sucesso!');
-    //   closeNewCategoryModal();
-    //   reset();
-    // } catch {
-    //   toast.error('Erro ao cadastrar a categoria.');
-    // }
-    // reset();
+    try {
+      const formData = new FormData();
+      formData.append('file', data.file);
+      formData.append('icon', data.file.name);
+      formData.append('userId', user?.id as string);
+      formData.append('id', category?.id as string);
+      formData.append('name', data.name);
+      formData.append('type', data.type);
+      await mutateAsync(formData);
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      toast.success('Categoria editada com sucesso!');
+      onClose();
+      reset();
+    } catch {
+      toast.error('Erro ao editar a categoria.');
+    }
+    reset();
   });
-
-  function handleOpenEditCategoriesModal(category: Category) {
-    setIsEditCategoriesModalOpen(true);
-    setCategoryBeingEdited(category);
-  }
-
-  function handleCloseEditCategoriesModal() {
-    setIsEditCategoriesModalOpen(false);
-    setCategoryBeingEdited(null);
-  }
 
   return {
     isNewCategoryModalOpen,
@@ -94,10 +85,6 @@ export function useEditCategoryModalController() {
     control,
     handleSubmit,
     isLoading: false,
-    reset,
-    handleOpenEditCategoriesModal,
-    handleCloseEditCategoriesModal,
-    isEditCategoriesModalOpen,
-    categoryBeingEdited
+    reset
   };
 }

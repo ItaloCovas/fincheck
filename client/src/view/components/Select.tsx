@@ -8,7 +8,6 @@ import {
 import { cn } from '../../shared/utils/cn';
 import { useState } from 'react';
 import { TrashIcon } from './icons/TrashIcon';
-import { useTransactionsController } from '../pages/Dashboard/components/Transactions/useTransactionsController';
 import { Category } from '../../shared/entities/category';
 
 interface SelectProps {
@@ -18,7 +17,7 @@ interface SelectProps {
 
   placeholder?: string;
 
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; category?: Category }[];
 
   onChange(value: string): void;
 
@@ -26,7 +25,7 @@ interface SelectProps {
 
   isCategory?: boolean;
 
-  category?: Category | undefined;
+  handleOpenEditCategoriesModal?(category: Category): void;
 }
 
 export function Select({
@@ -37,7 +36,7 @@ export function Select({
   onChange,
   value,
   isCategory,
-  category
+  handleOpenEditCategoriesModal
 }: SelectProps) {
   const [selectedValue, setSelectedValue] = useState(value);
 
@@ -92,9 +91,9 @@ export function Select({
                           <RdxSelect.Icon
                             className="text-red-900 z-[999] absolute right-5 top-2 cursor-pointer"
                             onClick={() => {
-                              // if (category !== undefined) {
-                              //   handleOpenEditCategoriesModal(category);
-                              // }
+                              if (handleOpenEditCategoriesModal) {
+                                handleOpenEditCategoriesModal(option.category!);
+                              }
                             }}
                           >
                             <Pencil2Icon className="w-4 h-4 text-black" />

@@ -9,6 +9,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { transactionsService } from '../../../../../shared/services/transactionsService';
 import { currencyStringToNumber } from '../../../../../shared/utils/currencyStringToNumber';
 import toast from 'react-hot-toast';
+import { Category } from '../../../../../shared/entities/category';
 
 const schema = z.object({
   value: z.union([z.string().nonempty('Valor é obrigatório'), z.number()]),
@@ -51,6 +52,11 @@ export function useEditTransactionModalController(
     useMutation(transactionsService.remove);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditCategoriesModalOpen, setIsEditCategoriesModalOpen] =
+    useState(false);
+
+  const [categoryBeingEdited, setCategoryBeingEdited] =
+    useState<null | Category>(null);
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
@@ -117,6 +123,17 @@ export function useEditTransactionModalController(
   function handleOpenDeleteModal() {
     setIsDeleteModalOpen(true);
   }
+
+  function handleOpenEditCategoriesModal(category: Category) {
+    setIsEditCategoriesModalOpen(true);
+    setCategoryBeingEdited(category);
+  }
+
+  function handleCloseEditCategoriesModal() {
+    setIsEditCategoriesModalOpen(false);
+    setCategoryBeingEdited(null);
+  }
+
   return {
     register,
     errors,
@@ -130,6 +147,10 @@ export function useEditTransactionModalController(
     isDeleteModalOpen,
     handleDeleteTransaction,
     handleCloseDeleteModal,
-    handleOpenDeleteModal
+    handleOpenDeleteModal,
+    isEditCategoriesModalOpen,
+    categoryBeingEdited,
+    handleCloseEditCategoriesModal,
+    handleOpenEditCategoriesModal
   };
 }
