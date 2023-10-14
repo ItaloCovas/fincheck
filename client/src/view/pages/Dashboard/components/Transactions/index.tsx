@@ -111,6 +111,7 @@ export function Transactions() {
                     transaction={transactionBeingEdited}
                   />
                 )}
+
                 {transactions.map((transaction) => {
                   return (
                     <div

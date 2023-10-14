@@ -8,8 +8,6 @@ interface CategoryIconProps {
 }
 
 export function CategoryIcon({ type, category }: CategoryIconProps) {
-  console.log(category);
-
   if (!category?.iconKey && !category?.iconUrl) {
     const Icon =
       iconsMap[type][
@@ -21,6 +19,12 @@ export function CategoryIcon({ type, category }: CategoryIconProps) {
 
     return <Icon />;
   } else {
-    return <img src={category.iconUrl} alt="Icon" className="w-11 h-11" />;
+    return (
+      <img
+        src={category.iconUrl}
+        alt="Transaction icon"
+        className="w-11 h-11"
+      />
+    );
   }
 }

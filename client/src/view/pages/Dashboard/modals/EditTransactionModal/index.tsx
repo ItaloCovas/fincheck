@@ -38,6 +38,12 @@ export function EditTransactionModal({
     handleOpenDeleteModal
   } = useEditTransactionModalController(transaction, onClose);
 
+  // const {
+  //   categoryBeingEdited,
+  //   isEditCategoriesModalOpen,
+  //   handleCloseEditCategoriesModal
+  // } = useEditCategoryModalController();
+
   const isExpense = transaction?.type === 'EXPENSE';
 
   if (isDeleteModalOpen) {
@@ -52,6 +58,16 @@ export function EditTransactionModal({
       />
     );
   }
+
+  // if (categoryBeingEdited) {
+  //   return (
+  //     <EditCategoryModal
+  //       isModalOpen={isEditCategoriesModalOpen}
+  //       onClose={handleCloseEditCategoriesModal}
+  //       category={categoryBeingEdited}
+  //     />
+  //   );
+  // }
 
   return (
     <Modal
@@ -102,6 +118,7 @@ export function EditTransactionModal({
               <Select
                 onChange={onChange}
                 placeholder="Categoria"
+                isCategory
                 value={value}
                 error={errors.categoryId?.message}
                 options={categories.map((category) => ({

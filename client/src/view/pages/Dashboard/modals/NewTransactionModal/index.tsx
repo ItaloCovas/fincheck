@@ -67,6 +67,7 @@ export function NewTransactionModal() {
               <Select
                 onChange={onChange}
                 placeholder="Categoria"
+                isCategory
                 value={value}
                 error={errors.categoryId?.message}
                 options={categories.map((category) => ({

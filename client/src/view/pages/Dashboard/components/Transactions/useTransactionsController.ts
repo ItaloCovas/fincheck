@@ -3,12 +3,15 @@ import { useDashboard } from '../../DashboardContext/useDashboard';
 import { useTransactions } from '../../../../../shared/hooks/useTransactions';
 import { TransactionsFilters } from '../../../../../shared/services/transactionsService/getAll';
 import { Transaction } from '../../../../../shared/entities/transaction';
+import { useCategories } from '../../../../../shared/hooks/useCategories';
 export function useTransactionsController() {
   const { areValuesVisible, toggleValueVisibility } = useDashboard();
 
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
+
   const [isEditTransactionsModalOpen, setIsEditTransactionsModalOpen] =
     useState(false);
+
   const [transactionBeingEdited, setTransactionBeingEdited] =
     useState<null | Transaction>(null);
 
@@ -19,6 +22,8 @@ export function useTransactionsController() {
 
   const { transactions, isLoading, isInitialLoading, refetchTransactions } =
     useTransactions(filters);
+
+  const { categories } = useCategories();
 
   useEffect(() => {
     refetchTransactions();
@@ -83,6 +88,7 @@ export function useTransactionsController() {
     isEditTransactionsModalOpen,
     transactionBeingEdited,
     handleOpenEditTransactionsModal,
-    handleCloseEditTransactionsModal
+    handleCloseEditTransactionsModal,
+    categories
   };
 }

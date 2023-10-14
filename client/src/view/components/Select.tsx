@@ -2,10 +2,14 @@ import * as RdxSelect from '@radix-ui/react-select';
 import {
   ChevronDownIcon,
   ChevronUpIcon,
-  CrossCircledIcon
+  CrossCircledIcon,
+  Pencil2Icon
 } from '@radix-ui/react-icons';
 import { cn } from '../../shared/utils/cn';
 import { useState } from 'react';
+import { TrashIcon } from './icons/TrashIcon';
+import { useTransactionsController } from '../pages/Dashboard/components/Transactions/useTransactionsController';
+import { Category } from '../../shared/entities/category';
 
 interface SelectProps {
   className?: string;
@@ -19,6 +23,10 @@ interface SelectProps {
   onChange(value: string): void;
 
   value?: string;
+
+  isCategory?: boolean;
+
+  category?: Category | undefined;
 }
 
 export function Select({
@@ -27,7 +35,9 @@ export function Select({
   placeholder,
   options,
   onChange,
-  value
+  value,
+  isCategory,
+  category
 }: SelectProps) {
   const [selectedValue, setSelectedValue] = useState(value);
 
@@ -67,16 +77,38 @@ export function Select({
                 <ChevronUpIcon />
               </RdxSelect.ScrollUpButton>
 
-              <RdxSelect.Viewport className="p-2 ">
+              <RdxSelect.Viewport className="p-2 relative">
                 {options.map((option) => {
                   return (
-                    <RdxSelect.Item
-                      className="p-2 text-gray-800 text-sm data-[state=checked]:font-bold outline-none data-[highlighted]:bg-gray-50 rounded-lg transition-colors cursor-pointer"
-                      value={option.value}
-                      key={option.value}
-                    >
-                      <RdxSelect.ItemText>{option.label}</RdxSelect.ItemText>
-                    </RdxSelect.Item>
+                    <div className="relative" key={option.value}>
+                      {isCategory && (
+                        <div>
+                          <RdxSelect.Icon
+                            className="text-red-900 z-[999] absolute right-0 top-2 cursor-pointer"
+                            onClick={() => console.log('excluir')}
+                          >
+                            <TrashIcon className="w-4 h-4 text-red-900" />
+                          </RdxSelect.Icon>
+                          <RdxSelect.Icon
+                            className="text-red-900 z-[999] absolute right-5 top-2 cursor-pointer"
+                            onClick={() => {
+                              // if (category !== undefined) {
+                              //   handleOpenEditCategoriesModal(category);
+                              // }
+                            }}
+                          >
+                            <Pencil2Icon className="w-4 h-4 text-black" />
+                          </RdxSelect.Icon>
+                        </div>
+                      )}
+                      <RdxSelect.Item
+                        className="flex justify-between p-2 text-gray-800 text-sm data-[state=checked]:font-bold outline-none data-[highlighted]:bg-gray-50 rounded-lg transition-colors cursor-pointer"
+                        value={option.value}
+                        key={option.value}
+                      >
+                        <RdxSelect.ItemText>{option.label}</RdxSelect.ItemText>
+                      </RdxSelect.Item>
+                    </div>
                   );
                 })}
               </RdxSelect.Viewport>
