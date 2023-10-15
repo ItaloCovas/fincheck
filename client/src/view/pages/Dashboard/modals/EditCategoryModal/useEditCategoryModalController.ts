@@ -53,21 +53,22 @@ export function useEditCategoryModalController(
   });
 
   const queryClient = useQueryClient();
-  const { isLoading, mutateAsync } = useMutation(categoriesService.update);
+  const { isLoading, mutateAsync: updateCategory } = useMutation(
+    categoriesService.update
+  );
   const { user } = useAuth();
 
   const handleSubmit = hookFormSubmit(async (data) => {
-    console.log(data);
     try {
-      const formData = new FormData();
-      formData.append('file', data.file);
-      formData.append('icon', data.file.name);
-      formData.append('userId', user?.id as string);
-      formData.append('id', category?.id as string);
-      formData.append('name', data.name);
-      formData.append('type', data.type);
-      await mutateAsync(formData);
+      const updateFormData = new FormData();
+      updateFormData.append('file', data.file);
+      updateFormData.append('userId', user?.id as string);
+      updateFormData.append('id', category?.id as string);
+      updateFormData.append('name', data.name);
+      updateFormData.append('type', data.type);
+      await updateCategory(updateFormData);
       queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: ['transactions'] });
       toast.success('Categoria editada com sucesso!');
       onClose();
       reset();
@@ -84,7 +85,7 @@ export function useEditCategoryModalController(
     errors,
     control,
     handleSubmit,
-    isLoading: false,
+    isLoading,
     reset
   };
 }

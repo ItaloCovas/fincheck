@@ -26,6 +26,8 @@ interface SelectProps {
   isCategory?: boolean;
 
   handleOpenEditCategoriesModal?(category: Category): void;
+
+  handleOpenRemoveCategoriesModal?(categoryId: string): void;
 }
 
 export function Select({
@@ -36,7 +38,8 @@ export function Select({
   onChange,
   value,
   isCategory,
-  handleOpenEditCategoriesModal
+  handleOpenEditCategoriesModal,
+  handleOpenRemoveCategoriesModal
 }: SelectProps) {
   const [selectedValue, setSelectedValue] = useState(value);
 
@@ -84,7 +87,13 @@ export function Select({
                         <div>
                           <RdxSelect.Icon
                             className="text-red-900 z-[999] absolute right-0 top-2 cursor-pointer"
-                            onClick={() => console.log('excluir')}
+                            onClick={() => {
+                              if (handleOpenRemoveCategoriesModal) {
+                                handleOpenRemoveCategoriesModal(
+                                  option.category!.id
+                                );
+                              }
+                            }}
                           >
                             <TrashIcon className="w-4 h-4 text-red-900" />
                           </RdxSelect.Icon>

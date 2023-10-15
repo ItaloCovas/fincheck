@@ -17,13 +17,10 @@ export interface EditCategoryParams {
 }
 
 export async function update(params: EditCategoryParams | FormData) {
-  if (params instanceof FormData && params.has('id')) {
-    return;
-  }
+  const formData = params as FormData;
+  const id = formData.get('id');
 
-  const { id, ...restParams } = params as EditCategoryParams;
-
-  const { data } = await httpClient.patch(`/categories/${id}`, restParams);
+  const { data } = await httpClient.patch(`/categories/${id}`, params);
 
   return data;
 }

@@ -40,7 +40,12 @@ export function EditTransactionModal({
     categoryBeingEdited,
     isEditCategoriesModalOpen,
     handleCloseEditCategoriesModal,
-    handleOpenEditCategoriesModal
+    handleOpenEditCategoriesModal,
+    isDeleteCategoryModalOpen,
+    handleOpenDeleteCategoryModal,
+    handleCloseDeleteCategoryModal,
+    isLoadingCategoryRemove,
+    handleDeleteCategory
   } = useEditTransactionModalController(transaction, onClose);
 
   const isExpense = transaction?.type === 'EXPENSE';
@@ -54,6 +59,17 @@ export function EditTransactionModal({
         isLoading={isLoadingRemove}
         onConfirm={handleDeleteTransaction}
         onClose={handleCloseDeleteModal}
+      />
+    );
+  }
+
+  if (isDeleteCategoryModalOpen) {
+    return (
+      <DeleteModal
+        title="Tem certeza de que deseja excluir esta categoria?"
+        isLoading={isLoadingCategoryRemove}
+        onConfirm={handleDeleteCategory}
+        onClose={handleCloseDeleteCategoryModal}
       />
     );
   }
@@ -119,6 +135,7 @@ export function EditTransactionModal({
                 placeholder="Categoria"
                 isCategory
                 handleOpenEditCategoriesModal={handleOpenEditCategoriesModal}
+                handleOpenRemoveCategoriesModal={handleOpenDeleteCategoryModal}
                 value={value}
                 error={errors.categoryId?.message}
                 options={categories.map((category) => ({

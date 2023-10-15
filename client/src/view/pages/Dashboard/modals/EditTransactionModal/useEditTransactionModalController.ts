@@ -10,6 +10,7 @@ import { transactionsService } from '../../../../../shared/services/transactions
 import { currencyStringToNumber } from '../../../../../shared/utils/currencyStringToNumber';
 import toast from 'react-hot-toast';
 import { Category } from '../../../../../shared/entities/category';
+import { categoriesService } from '../../../../../shared/services/categoriesService';
 
 const schema = z.object({
   value: z.union([z.string().nonempty('Valor é obrigatório'), z.number()]),
@@ -45,18 +46,31 @@ export function useEditTransactionModalController(
   const { accounts } = useBankAccounts();
   const queryClient = useQueryClient();
   const { categories: categoriesList } = useCategories();
+
   const { isLoading, mutateAsync: updateTransaction } = useMutation(
     transactionsService.update
   );
+
   const { isLoading: isLoadingRemove, mutateAsync: removeTransaction } =
     useMutation(transactionsService.remove);
 
+  const { isLoading: isLoadingCategoryRemove, mutateAsync: removeCategory } =
+    useMutation(categoriesService.remove);
+
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const [isDeleteCategoryModalOpen, setIsDeleteCategoryModalOpen] =
+    useState(false);
+
   const [isEditCategoriesModalOpen, setIsEditCategoriesModalOpen] =
     useState(false);
 
   const [categoryBeingEdited, setCategoryBeingEdited] =
     useState<null | Category>(null);
+
+  const [categoryBeingDeleted, setCategoryBeingDeleted] = useState<
+    null | string
+  >(null);
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
@@ -116,12 +130,35 @@ export function useEditTransactionModalController(
     }
   }
 
+  async function handleDeleteCategory() {
+    try {
+      await removeCategory(categoryBeingDeleted!);
+
+      queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+
+      toast.success('Categoria deletada com sucesso!');
+      onClose();
+    } catch {
+      toast.error('Erro ao deletar a categoria.');
+    }
+  }
+
   function handleCloseDeleteModal() {
     setIsDeleteModalOpen(false);
   }
 
   function handleOpenDeleteModal() {
     setIsDeleteModalOpen(true);
+  }
+
+  function handleCloseDeleteCategoryModal() {
+    setIsDeleteCategoryModalOpen(false);
+  }
+
+  function handleOpenDeleteCategoryModal(categoryId: string) {
+    setIsDeleteCategoryModalOpen(true);
+    setCategoryBeingDeleted(categoryId);
   }
 
   function handleOpenEditCategoriesModal(category: Category) {
@@ -144,13 +181,18 @@ export function useEditTransactionModalController(
     reset,
     isLoading,
     isLoadingRemove,
+    isLoadingCategoryRemove,
     isDeleteModalOpen,
     handleDeleteTransaction,
     handleCloseDeleteModal,
     handleOpenDeleteModal,
     isEditCategoriesModalOpen,
+    isDeleteCategoryModalOpen,
     categoryBeingEdited,
     handleCloseEditCategoriesModal,
-    handleOpenEditCategoriesModal
+    handleOpenEditCategoriesModal,
+    handleCloseDeleteCategoryModal,
+    handleOpenDeleteCategoryModal,
+    handleDeleteCategory
   };
 }
