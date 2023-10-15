@@ -72,7 +72,8 @@ export function NewTransactionModal() {
                 error={errors.categoryId?.message}
                 options={categories.map((category) => ({
                   value: category.id,
-                  label: category.name
+                  label: category.name,
+                  category: category
                 }))}
               />
             )}

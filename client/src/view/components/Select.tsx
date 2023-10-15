@@ -48,6 +48,18 @@ export function Select({
     onChange?.(value);
   }
 
+  const defaultCategories = [
+    'Casa',
+    'Alimentação',
+    'Educação',
+    'Lazer',
+    'Mercado',
+    'Roupas',
+    'Transporte',
+    'Viagem',
+    'Outro'
+  ];
+
   return (
     <div>
       <div className="relative">
@@ -81,9 +93,10 @@ export function Select({
 
               <RdxSelect.Viewport className="p-2 relative">
                 {options.map((option) => {
+                  const canChange = !defaultCategories.includes(option.label);
                   return (
                     <div className="relative" key={option.value}>
-                      {isCategory && (
+                      {isCategory && canChange && (
                         <div>
                           <RdxSelect.Icon
                             className="text-red-900 z-[999] absolute right-0 top-2 cursor-pointer"
