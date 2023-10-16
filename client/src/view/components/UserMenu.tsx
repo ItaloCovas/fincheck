@@ -1,9 +1,12 @@
 import { ExitIcon } from '@radix-ui/react-icons';
 import { DropdownMenu } from './DropdownMenu';
 import { useAuth } from '../../shared/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 export function UserMenu() {
   const { signOut, user } = useAuth();
+
+  const { t } = useTranslation();
 
   return (
     <DropdownMenu.Root>
@@ -25,7 +28,7 @@ export function UserMenu() {
           className="flex items-center justify-between dark:text-white dark:hover:!bg-gray-600"
           onSelect={() => signOut()}
         >
-          Sair
+          {t('logoutText')}
           <ExitIcon className="w-4 h-4" />
         </DropdownMenu.Item>
       </DropdownMenu.Content>

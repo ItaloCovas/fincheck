@@ -11,6 +11,7 @@ import { currencyStringToNumber } from '../../../../../shared/utils/currencyStri
 import toast from 'react-hot-toast';
 import { Category } from '../../../../../shared/entities/category';
 import { categoriesService } from '../../../../../shared/services/categoriesService';
+import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   value: z.union([z.string().nonempty('Valor é obrigatório'), z.number()]),
@@ -43,6 +44,7 @@ export function useEditTransactionModalController(
     }
   });
 
+  const { t } = useTranslation();
   const { accounts } = useBankAccounts();
   const queryClient = useQueryClient();
   const { categories: categoriesList } = useCategories();
@@ -193,6 +195,7 @@ export function useEditTransactionModalController(
     handleOpenEditCategoriesModal,
     handleCloseDeleteCategoryModal,
     handleOpenDeleteCategoryModal,
-    handleDeleteCategory
+    handleDeleteCategory,
+    t
   };
 }

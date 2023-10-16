@@ -1,3 +1,4 @@
+import { TFunction } from 'i18next';
 import { Button } from './Button';
 import { Modal } from './Modal';
 import { TrashIcon } from './icons/TrashIcon';
@@ -12,6 +13,8 @@ interface DeleteModalProps {
   description?: string;
 
   isLoading: boolean;
+
+  t: TFunction<'translation', undefined>;
 }
 
 export function DeleteModal({
@@ -19,7 +22,8 @@ export function DeleteModal({
   onConfirm,
   title,
   description,
-  isLoading
+  isLoading,
+  t
 }: DeleteModalProps) {
   return (
     <Modal open title="Excluir" onClose={onClose}>
@@ -44,7 +48,7 @@ export function DeleteModal({
           onClick={onConfirm}
           isLoading={isLoading}
         >
-          Sim, desejo excluir
+          {t('accounts.confirmDelete')}
         </Button>
         <Button
           className="w-full dark:text-white dark:!border-white dark:hover:!bg-gray-600"
@@ -52,7 +56,7 @@ export function DeleteModal({
           onClick={onClose}
           disabled={isLoading}
         >
-          Cancelar
+          {t('accounts.cancelDelete')}
         </Button>
       </div>
     </Modal>

@@ -20,7 +20,8 @@ export function Accounts() {
     isLoading,
     accounts,
     openNewAccountModal,
-    currentBalance
+    currentBalance,
+    t
   } = useAccountsController();
 
   return (
@@ -34,7 +35,7 @@ export function Accounts() {
         <>
           <div>
             <span className="text-white tracking-[-0.5px] block">
-              Saldo total
+              {t('accounts.totalBalance')}
             </span>
             <div className="flex items-center gap-2">
               <strong
@@ -43,7 +44,7 @@ export function Accounts() {
                   !areValuesVisible && 'blur-md select-none'
                 )}
               >
-                {formatCurrency(currentBalance)}
+                {formatCurrency(currentBalance, t)}
               </strong>
 
               <button
@@ -60,7 +61,7 @@ export function Accounts() {
               <>
                 <div className="mb-4" slot="container-start">
                   <strong className="text-white tracking-[-0.5px] text-lg font-bold">
-                    Minhas contas
+                    {t('accounts.myAccounts')}
                   </strong>
                 </div>
 
@@ -72,7 +73,7 @@ export function Accounts() {
                     <PlusIcon className="w-6 h-6" />
                   </div>
                   <span className="font-medium tracking-[-0.5px] block w-28 text-center">
-                    Cadastre uma nova conta
+                    {t('accounts.newAccount')}
                   </span>
                 </button>
               </>
@@ -94,7 +95,7 @@ export function Accounts() {
                     slot="container-start"
                   >
                     <strong className="text-white tracking-[-0.5px] text-lg font-bold">
-                      Minhas contas
+                      {t('accounts.myAccounts')}
                     </strong>
                     <SliderNavigation
                       isBeginning={sliderState.isBeginning}

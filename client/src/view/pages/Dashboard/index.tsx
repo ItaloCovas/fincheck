@@ -1,3 +1,4 @@
+import { LanguageSwitcher } from '../../components/LanguageSwitcher.tsx';
 import { Logo } from '../../components/Logo';
 import ThemeSwitcher from '../../components/ThemeSwitcher.tsx';
 import { UserMenu } from '../../components/UserMenu';
@@ -22,6 +23,7 @@ export function Dashboard() {
             <header className="h-12 flex items-center justify-between">
               <Logo className="h-6 text-teal-900 dark:text-white" />
               <div className="flex items-center gap-x-8">
+                <LanguageSwitcher />
                 <ThemeSwitcher />
                 <UserMenu />
               </div>

@@ -1,6 +1,19 @@
 {
   "translation": {
+    "currency": "$",
+    "save": "Save",
+    "formatCurrency": {
+      "country": "en-us",
+      "currency": "USD"
+    },
+    "fab": {
+      "newCategory": "New Category",
+      "newExpense": "New Expense",
+      "newIncome": "New Income",
+      "newAccount": "New Account"
+    },
     "welcomeText": "Manage your personal finances in a simple way with fincheck, and best of all, it's completely free!",
+    "logoutText": "Logout",
     "login": {
       "loginTitle": "Sign in to your account",
       "loginSuggestion": "New here?",
@@ -13,9 +26,24 @@
       "createAccountSuggestion": "Sign in",
       "registerButton": "Register"
     },
+    "accounts": {
+      "totalBalance": "Total balance",
+      "initialBalance": "Initial balance",
+      "myAccounts": "My accounts",
+      "newAccount": "Create a new account",
+      "currentBalance": "Current balance",
+      "editAccountTitle": "Edit Account",
+      "deleteAccountTitle": "Are you sure you want to delete your account?",
+      "deleteAccountDescription": "When deleting the account, all income and expense records related to it will also be deleted.",
+      "confirmDelete": "Yes, I want to delete",
+      "cancelDelete": "Cancel"
+    },
     "placeholders": {
       "password": "Password",
-      "name": "Name"
+      "name": "Name",
+      "accountName": "Account name",
+      "type": "Type",
+      "color": "Color"
     },
     "schemaMessages": {},
     "toastMessages": {

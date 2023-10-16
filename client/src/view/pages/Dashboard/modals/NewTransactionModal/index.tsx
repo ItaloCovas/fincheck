@@ -18,7 +18,8 @@ export function NewTransactionModal() {
     register,
     accounts,
     categories,
-    isLoading
+    isLoading,
+    t
   } = useNewTransactionModalController();
 
   const isExpense = newTransactionType === 'EXPENSE';
@@ -37,7 +38,7 @@ export function NewTransactionModal() {
 
           <div className="flex items-center gap-2">
             <span className="text-gray-600 text-lg tracking-[-0.5px] dark:text-white">
-              R${' '}
+              {t('currency')}{' '}
             </span>
             <Controller
               control={control}

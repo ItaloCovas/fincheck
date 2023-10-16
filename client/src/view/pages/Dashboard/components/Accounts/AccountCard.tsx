@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { BankAccount } from '../../../../../shared/entities/bankAccount';
 import { cn } from '../../../../../shared/utils/cn';
 import { formatCurrency } from '../../../../../shared/utils/formatCurrency';
@@ -10,6 +11,8 @@ interface AccountCardProps {
 
 export function AccountCard({ data }: AccountCardProps) {
   const { areValuesVisible, openEditAccountModal } = useDashboard();
+
+  const { t } = useTranslation();
 
   const { color, type, currentBalance, name } = data;
 
@@ -34,9 +37,11 @@ export function AccountCard({ data }: AccountCardProps) {
             !areValuesVisible && 'blur-sm select-none'
           )}
         >
-          {formatCurrency(currentBalance)}
+          {formatCurrency(currentBalance, t)}
         </span>
-        <small className="text-gray-600 text-sm">Saldo atual</small>
+        <small className="text-gray-600 text-sm">
+          {t('accounts.currentBalance')}
+        </small>
       </div>
     </div>
   );

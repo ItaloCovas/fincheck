@@ -22,25 +22,26 @@ export function EditAccountModal() {
     handleCloseDeleteModal,
     handleOpenDeleteModal,
     handleDeleteAccount,
-    isLoadingRemove
+    isLoadingRemove,
+    t
   } = useEditAccountModalController();
 
   if (isDeleteModalOpen) {
     return (
       <DeleteModal
-        title="Tem certeza de que deseja excluir sua conta?"
-        description="Ao excluir a conta, também serão excluídos todos os registros de
-      receita e despesa da relacionados a mesma."
+        title={t('accounts.deleteAccountTitle')}
+        description={t('accounts.deleteAccountDescription')}
         isLoading={isLoadingRemove}
         onConfirm={handleDeleteAccount}
         onClose={handleCloseDeleteModal}
+        t={t}
       />
     );
   }
 
   return (
     <Modal
-      title="Editar Conta"
+      title={t('accounts.editAccountTitle')}
       open={isEditAccountModalOpen}
       onClose={closeEditAccountModal}
       rightAction={
@@ -52,11 +53,11 @@ export function EditAccountModal() {
       <form onSubmit={handleSubmit}>
         <div>
           <span className="text-gray-600 tracking-[-0.5px] text-xs dark:text-white">
-            Saldo inicial
+            {t('accounts.initialBalance')}
           </span>
           <div className="flex items-center gap-2">
             <span className="text-gray-600 tracking-[-0.5px] text-lg dark:text-white">
-              R$
+              {t('currency')}
             </span>
 
             <Controller
@@ -77,7 +78,7 @@ export function EditAccountModal() {
         <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
-            placeholder="Nome da Conta"
+            placeholder={t('placeholders.accountName')}
             error={errors.name?.message}
             {...register('name')}
           />
@@ -88,7 +89,7 @@ export function EditAccountModal() {
             defaultValue="CHECKING"
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder="Tipo"
+                placeholder={t('placeholders.type')}
                 error={errors.type?.message}
                 onChange={onChange}
                 value={value}
@@ -119,13 +120,14 @@ export function EditAccountModal() {
                 error={errors.color?.message}
                 onChange={onChange}
                 value={value}
+                t={t}
               />
             )}
           />
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Salvar
+          {t('save')}
         </Button>
       </form>
     </Modal>

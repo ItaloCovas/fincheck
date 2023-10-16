@@ -15,7 +15,8 @@ export function NewAccountModal() {
     handleSubmit,
     register,
     control,
-    isLoading
+    isLoading,
+    t
   } = useNewAccountModalController();
 
   return (
@@ -31,7 +32,7 @@ export function NewAccountModal() {
           </span>
           <div className="flex items-center gap-2">
             <span className="text-gray-600 tracking-[-0.5px] text-lg dark:text-white">
-              R$
+              {t('currency')}
             </span>
 
             <Controller

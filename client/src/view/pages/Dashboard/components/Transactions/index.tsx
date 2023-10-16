@@ -31,7 +31,8 @@ export function Transactions() {
     handleCloseEditTransactionsModal,
     handleOpenEditTransactionsModal,
     isEditTransactionsModalOpen,
-    transactionBeingEdited
+    transactionBeingEdited,
+    t
   } = useTransactionsController();
 
   const { theme } = useTheme();
@@ -158,7 +159,7 @@ export function Transactions() {
                         )}
                       >
                         {transaction.type === 'EXPENSE' ? '-' : '+'}{' '}
-                        {formatCurrency(transaction.value)}
+                        {formatCurrency(transaction.value, t)}
                       </span>
                     </div>
                   );

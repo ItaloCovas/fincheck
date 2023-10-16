@@ -6,8 +6,12 @@ import { useDashboard } from '../../DashboardContext/useDashboard';
 import { NewCategoryIcon } from '../../../../components/icons/NewCategoryIcon';
 
 export function Fab() {
-  const { openNewAccountModal, openNewTransactionModal, openNewCategoryModal } =
-    useDashboard();
+  const {
+    openNewAccountModal,
+    openNewTransactionModal,
+    openNewCategoryModal,
+    t
+  } = useDashboard();
 
   return (
     <div className="fixed right-4 bottom-4 z-50">
@@ -24,7 +28,7 @@ export function Fab() {
             onSelect={openNewCategoryModal}
           >
             <NewCategoryIcon />
-            Nova Categoria
+            {t('fab.newCategory')}
           </DropdownMenu.Item>
 
           <DropdownMenu.Item
@@ -32,7 +36,7 @@ export function Fab() {
             onSelect={() => openNewTransactionModal('EXPENSE')}
           >
             <CategoryIcon type="expense" />
-            Nova Despesa
+            {t('fab.newExpense')}
           </DropdownMenu.Item>
 
           <DropdownMenu.Item
@@ -40,7 +44,7 @@ export function Fab() {
             onSelect={() => openNewTransactionModal('INCOME')}
           >
             <CategoryIcon type="income" />
-            Nova Receita
+            {t('fab.newIncome')}
           </DropdownMenu.Item>
 
           <DropdownMenu.Item
@@ -48,7 +52,7 @@ export function Fab() {
             onSelect={openNewAccountModal}
           >
             <BankAccountIcon />
-            Nova Conta
+            {t('fab.newAccount')}
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>

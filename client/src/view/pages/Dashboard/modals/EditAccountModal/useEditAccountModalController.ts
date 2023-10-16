@@ -8,6 +8,7 @@ import { bankAccountsService } from '../../../../../shared/services/bankAccounts
 import { currencyStringToNumber } from '../../../../../shared/utils/currencyStringToNumber';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   initialBalance: z.union([
@@ -39,6 +40,8 @@ export function useEditAccountModalController() {
       initialBalance: accountBeingEdited?.initialBalance.toFixed(2)
     }
   });
+
+  const { t } = useTranslation();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -98,6 +101,7 @@ export function useEditAccountModalController() {
     handleOpenDeleteModal,
     handleCloseDeleteModal,
     handleDeleteAccount,
-    isLoadingRemove
+    isLoadingRemove,
+    t
   };
 }

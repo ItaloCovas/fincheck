@@ -1,5 +1,7 @@
 import { createContext, useCallback, useState } from 'react';
 import { BankAccount } from '../../../../shared/entities/bankAccount';
+import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 
 interface DashboardContextProps {
   areValuesVisible: boolean;
@@ -15,6 +17,8 @@ interface DashboardContextProps {
   accountBeingEdited: BankAccount | null;
 
   newTransactionType: 'INCOME' | 'EXPENSE' | null;
+
+  t: TFunction<'translation', undefined>;
 
   toggleValueVisibility(): void;
 
@@ -53,6 +57,8 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
   const [newTransactionType, setNewTransactionType] = useState<
     'INCOME' | 'EXPENSE' | null
   >(null);
+
+  const { t } = useTranslation();
 
   const toggleValueVisibility = useCallback(() => {
     setAreValuesVisible((prevState) => !prevState);
@@ -112,7 +118,8 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
         closeNewCategoryModal,
         newTransactionType,
         isEditAccountModalOpen,
-        accountBeingEdited
+        accountBeingEdited,
+        t
       }}
     >
       {children}

@@ -9,6 +9,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { transactionsService } from '../../../../../shared/services/transactionsService';
 import toast from 'react-hot-toast';
 import { currencyStringToNumber } from '../../../../../shared/utils/currencyStringToNumber';
+import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   value: z.string().nonempty('Valor é obrigatório'),
@@ -43,6 +44,7 @@ export function useNewTransactionModalController() {
   });
 
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
   const { accounts } = useBankAccounts();
   const { categories: categoriesList } = useCategories();
   const { isLoading, mutateAsync } = useMutation(transactionsService.create);
@@ -90,6 +92,7 @@ export function useNewTransactionModalController() {
     accounts,
     categories,
     isLoading,
-    reset
+    reset,
+    t
   };
 }

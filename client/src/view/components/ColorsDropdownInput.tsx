@@ -3,6 +3,7 @@ import { cn } from '../../shared/utils/cn';
 import { DropdownMenu } from './DropdownMenu';
 import { ColorIcon } from './icons/ColorIcon';
 import { useState } from 'react';
+import { TFunction } from 'i18next';
 
 interface ColorsDropdownInputProps {
   error?: string;
@@ -12,6 +13,8 @@ interface ColorsDropdownInputProps {
   onChange(value: string): void;
 
   value?: string;
+
+  t: TFunction<'translation', undefined>;
 }
 
 type ColorProps = {
@@ -40,7 +43,8 @@ export function ColorsDropdownInput({
   error,
   className,
   onChange,
-  value
+  value,
+  t
 }: ColorsDropdownInputProps) {
   const [selectedColor, setSelectedColor] = useState<null | ColorProps>(() => {
     if (!value) {
@@ -65,7 +69,7 @@ export function ColorsDropdownInput({
               className
             )}
           >
-            Cor
+            {t('placeholders.color')}
             <div className="absolute right-3 top-1/2 -translate-y-1/2">
               {!selectedColor && (
                 <ChevronDownIcon className="w-6 h-6 text-gray-800 " />

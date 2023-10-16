@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { bankAccountsService } from '../../../../../shared/services/bankAccountsService';
 import { currencyStringToNumber } from '../../../../../shared/utils/currencyStringToNumber';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   initialBalance: z.string().nonempty('Saldo inicial é obrigatório'),
@@ -37,6 +38,7 @@ export function useNewAccountModalController() {
   });
 
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
   const { isLoading, mutateAsync } = useMutation(bankAccountsService.create);
 
   const handleSubmit = hookFormSubmit(async (data) => {
@@ -62,6 +64,7 @@ export function useNewAccountModalController() {
     errors,
     handleSubmit,
     control,
-    isLoading
+    isLoading,
+    t
   };
 }

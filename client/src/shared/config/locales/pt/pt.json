@@ -1,6 +1,19 @@
 {
   "translation": {
+    "currency": "R$",
+    "save": "Salvar",
+    "formatCurrency": {
+      "country": "pt-br",
+      "currency": "BRL"
+    },
+    "fab": {
+      "newCategory": "Nova Categoria",
+      "newExpense": "Nova Despesa",
+      "newIncome": "Nova Receita",
+      "newAccount": "Nova Conta"
+    },
     "welcomeText": "Gerencie suas finanças pessoais de uma forma simples com o fincheck, e o melhor, totalmente de graça!",
+    "logoutText": "Sair",
     "login": {
       "loginTitle": "Entre em sua conta",
       "loginSuggestion": "Novo por aqui?",
@@ -13,9 +26,24 @@
       "createAccountSuggestion": "Fazer login",
       "registerButton": "Criar conta"
     },
+    "accounts": {
+      "totalBalance": "Saldo total",
+      "initialBalance": "Saldo inicial",
+      "myAccounts": "Minhas contas",
+      "newAccount": "Cadastre uma nova conta",
+      "currentBalance": "Saldo atual",
+      "editAccountTitle": "Editar Conta",
+      "deleteAccountTitle": "Tem certeza de que deseja excluir sua conta?",
+      "deleteAccountDescription": "Ao excluir a conta, também serão excluídos todos os registros de receita e despesa da relacionados a mesma.",
+      "confirmDelete": "Sim, desejo excluir",
+      "cancelDelete": "Cancelar"
+    },
     "placeholders": {
       "password": "Senha",
-      "name": "Nome"
+      "name": "Nome",
+      "accountName": "Nome da conta",
+      "type": "Tipo",
+      "color": "Cor"
     },
     "schemaMessages": {},
     "toastMessages": {
