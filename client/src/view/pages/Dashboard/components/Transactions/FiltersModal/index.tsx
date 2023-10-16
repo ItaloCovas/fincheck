@@ -31,18 +31,18 @@ export function FiltersModal({
   return (
     <Modal open={open} title="Filtros" onClose={onClose}>
       <div>
-        <span className="text-lg tracking-[-1px] font-bold text-gray-800">
+        <span className="text-lg tracking-[-1px] font-bold text-gray-800 dark:text-gray-500">
           Conta
         </span>
       </div>
-      <div className="space-y-2 mt-2">
+      <div className="space-y-2 mt-2 ">
         {accounts.map((account) => {
           return (
             <button
               key={account.id}
               onClick={() => handleSelectBankAccount(account.id)}
               className={cn(
-                'p-2 rounded-2xl w-full text-left  text-gray-800 hover:bg-gray-50 transition-colors',
+                'p-2 rounded-2xl w-full text-left  text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors',
                 account.id === selectedBankAccountId && '!bg-gray-200'
               )}
             >
@@ -53,7 +53,7 @@ export function FiltersModal({
       </div>
 
       <div className="mt-10">
-        <span className="text-lg tracking-[-1px] font-bold text-gray-800">
+        <span className="text-lg tracking-[-1px] font-bold text-gray-800 dark:text-gray-500">
           Ano
         </span>
       </div>
@@ -62,18 +62,18 @@ export function FiltersModal({
           className="h-12 w-12 flex justify-center items-center text-gray-800"
           onClick={() => handleChangeYear(-1)}
         >
-          <ChevronLeftIcon className="w-6 h-6 " />
+          <ChevronLeftIcon className="w-6 h-6 dark:text-white" />
         </button>
         <div className="flex-1 text-center">
-          <span className="text-sm font-medium tracking-[-0.5px]">
+          <span className="text-sm font-medium tracking-[-0.5px] text-black dark:text-white">
             {selectedYear}
           </span>
         </div>
         <button
           onClick={() => handleChangeYear(1)}
-          className="h-12 w-12 flex justify-center items-center text-gray-800"
+          className="h-12 w-12 flex justify-center items-center text-gray-800 "
         >
-          <ChevronRightIcon className="w-6 h-6 " />
+          <ChevronRightIcon className="w-6 h-6 dark:text-white" />
         </button>
       </div>
 

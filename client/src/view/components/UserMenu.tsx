@@ -20,9 +20,9 @@ export function UserMenu() {
         </div>
       </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content className="w-32">
+      <DropdownMenu.Content className="w-32 dark:bg-gray-700">
         <DropdownMenu.Item
-          className="flex items-center justify-between"
+          className="flex items-center justify-between dark:text-white dark:hover:!bg-gray-600"
           onSelect={() => signOut()}
         >
           Sair

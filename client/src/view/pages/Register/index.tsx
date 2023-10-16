@@ -9,11 +9,11 @@ export function Register() {
   return (
     <>
       <header className="flex flex-col items-center gap-4 text-center">
-        <h1 className="text-2xl text-gray-900 font-bold tracking-[-1px]">
+        <h1 className="text-2xl text-gray-900 font-bold tracking-[-1px] dark:text-white">
           Crie sua conta
         </h1>
         <p className="space-x-2">
-          <span className="text-gray-700 tracking-[-0.5px]">
+          <span className="text-gray-700 tracking-[-0.5px] dark:text-gray-500">
             Já possui uma conta?
           </span>
           <Link

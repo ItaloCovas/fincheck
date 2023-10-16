@@ -38,6 +38,7 @@ export function EditCategoryModal({
             render={({ field }) => (
               <Input
                 type="file"
+                className="dark:bg-transparent dark:text-white"
                 error={errors.file?.message as string}
                 onChange={(event) => {
                   if (

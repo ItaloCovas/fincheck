@@ -18,14 +18,17 @@ export function Fab() {
           </button>
         </DropdownMenu.Trigger>
 
-        <DropdownMenu.Content side="top">
-          <DropdownMenu.Item className="gap-2" onSelect={openNewCategoryModal}>
+        <DropdownMenu.Content side="top" className="bg-white dark:bg-gray-700 ">
+          <DropdownMenu.Item
+            className="gap-2 dark:hover:!bg-gray-600 dark:text-white"
+            onSelect={openNewCategoryModal}
+          >
             <NewCategoryIcon />
             Nova Categoria
           </DropdownMenu.Item>
 
           <DropdownMenu.Item
-            className="gap-2"
+            className="gap-2 dark:hover:!bg-gray-600 dark:text-white"
             onSelect={() => openNewTransactionModal('EXPENSE')}
           >
             <CategoryIcon type="expense" />
@@ -33,14 +36,17 @@ export function Fab() {
           </DropdownMenu.Item>
 
           <DropdownMenu.Item
-            className="gap-2"
+            className="gap-2 dark:hover:!bg-gray-600 dark:text-white"
             onSelect={() => openNewTransactionModal('INCOME')}
           >
             <CategoryIcon type="income" />
             Nova Receita
           </DropdownMenu.Item>
 
-          <DropdownMenu.Item className="gap-2" onSelect={openNewAccountModal}>
+          <DropdownMenu.Item
+            className="gap-2 dark:hover:!bg-gray-600 dark:text-white"
+            onSelect={openNewAccountModal}
+          >
             <BankAccountIcon />
             Nova Conta
           </DropdownMenu.Item>

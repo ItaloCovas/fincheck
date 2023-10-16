@@ -26,11 +26,13 @@ export function NewAccountModal() {
     >
       <form onSubmit={handleSubmit}>
         <div>
-          <span className="text-gray-600 tracking-[-0.5px] text-xs">
+          <span className="text-gray-600 tracking-[-0.5px] text-xs dark:text-white">
             Saldo inicial
           </span>
           <div className="flex items-center gap-2">
-            <span className="text-gray-600 tracking-[-0.5px] text-lg">R$</span>
+            <span className="text-gray-600 tracking-[-0.5px] text-lg dark:text-white">
+              R$
+            </span>
 
             <Controller
               control={control}

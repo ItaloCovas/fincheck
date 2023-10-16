@@ -43,6 +43,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
     queryClient.invalidateQueries({ queryKey: ['transactions'] });
     queryClient.invalidateQueries({ queryKey: ['categories'] });
+    localStorage.clear();
 
     remove();
     setSignedIn(false);

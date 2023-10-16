@@ -19,7 +19,7 @@ export function InputCurrency({ error, onChange, value }: InputCurrencyProps) {
         value={value}
         onValueChange={(value) => onChange?.(value)}
         className={cn(
-          'text-gray-800 text-[32px] font-bold tracking-[-1px] outline-none w-full',
+          'text-gray-800 text-[32px] font-bold tracking-[-1px] outline-none w-full dark:bg-gray-700 dark:text-white',
           error && 'text-red-900'
         )}
       />

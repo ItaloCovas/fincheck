@@ -14,6 +14,7 @@ import { TransactionTypeDropdown } from './TransactionTypeDropdown';
 import { FiltersModal } from './FiltersModal';
 import { formatDate } from '../../../../../shared/utils/formatDate';
 import { EditTransactionModal } from '../../modals/EditTransactionModal';
+import { useTheme } from '../../../../../shared/hooks/useTheme';
 
 export function Transactions() {
   const {
@@ -33,10 +34,12 @@ export function Transactions() {
     transactionBeingEdited
   } = useTransactionsController();
 
+  const { theme } = useTheme();
+
   const hasTransactions = transactions.length > 0;
 
   return (
-    <div className="bg-gray-100 rounded-2xl h-full w-full p-10 flex flex-col">
+    <div className="bg-gray-100 rounded-2xl h-full w-full p-10 flex flex-col dark:bg-gray-700">
       {isInitialLoading && (
         <div className="flex items-center justify-center w-full h-full">
           <Spinner className="w-10 h-10" />
@@ -55,10 +58,13 @@ export function Transactions() {
               <TransactionTypeDropdown
                 onSelect={handleChangeFilters('type')}
                 selectedType={filters.type}
+                theme={theme}
               />
 
               <button onClick={handleOpenFiltersModal}>
-                <FilterIcon />
+                <FilterIcon
+                  selectedTheme={theme === 'dark' ? 'dark' : 'light'}
+                />
               </button>
             </div>
 
@@ -120,7 +126,7 @@ export function Transactions() {
                       onClick={() =>
                         handleOpenEditTransactionsModal(transaction)
                       }
-                      className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4"
+                      className="bg-white dark:bg-gray-500 p-4 rounded-2xl flex items-center justify-between gap-4"
                     >
                       <div className="flex-1 flex items-center gap-3">
                         <CategoryIcon
@@ -133,10 +139,10 @@ export function Transactions() {
                         />
 
                         <div className="">
-                          <strong className="tracking-[-0.5px] font-bold block">
+                          <strong className="tracking-[-0.5px] font-bold block dark:text-gray-800">
                             {transaction.name}
                           </strong>
-                          <span className="text-sm text-gray-600">
+                          <span className="text-sm text-gray-600 dark:text-gray-800">
                             {formatDate(new Date(transaction.date))}
                           </span>
                         </div>
@@ -146,8 +152,8 @@ export function Transactions() {
                         className={cn(
                           'text-red-800 font-medium tracking-[-0.5px]',
                           transaction.type === 'EXPENSE'
-                            ? 'text-red-800'
-                            : 'text-green-800',
+                            ? 'text-red-800 dark:text-red-900'
+                            : 'text-green-800 dark:text-green-900',
                           !areValuesVisible && 'blur-sm'
                         )}
                       >

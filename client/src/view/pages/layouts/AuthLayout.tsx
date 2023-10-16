@@ -1,13 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import illustration from '../../../assets/illustration.png';
 import { Logo } from '../../components/Logo';
+import ThemeSwitcher from '../../components/ThemeSwitcher';
 
 export function AuthLayout() {
   return (
     <div className="flex w-full h-full">
       <section className="w-full h-full flex flex-col gap-16 items-center justify-center lg:w-1/2">
-        <Logo className="h-6 text-gray-500" />
-
+        <ThemeSwitcher />
+        <Logo className="h-6 text-gray-500 dark:text-teal-800" />
         <div className="w-full max-w-[504px] px-8">
           <Outlet />
         </div>

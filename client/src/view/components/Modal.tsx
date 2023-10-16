@@ -32,11 +32,11 @@ export function Modal({
         />
         <RdxDialog.Content
           className={cn(
-            'fixed w-full max-w-[400px] outline-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 space-y-10 bg-white rounded-2xl z-[51] shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]',
+            'fixed w-full max-w-[400px] outline-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 space-y-10 bg-white dark:bg-gray-700 rounded-2xl z-[51] shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]',
             'data-[state=open]:animate-content-show  '
           )}
         >
-          <header className="h-12 flex items-center justify-between text-gray-800">
+          <header className="h-12 flex items-center justify-between text-gray-800 dark:text-white">
             <button
               className="h-12 w-12 flex items-center justify-center outline-none"
               onClick={onClose}

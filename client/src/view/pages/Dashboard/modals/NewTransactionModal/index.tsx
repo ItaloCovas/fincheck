@@ -31,12 +31,14 @@ export function NewTransactionModal() {
     >
       <form onSubmit={handleSubmit}>
         <div>
-          <span className="text-gray-600 text-sm tracking-[-0.5px]">
+          <span className="text-gray-600 text-sm tracking-[-0.5px] dark:text-white">
             Valor {isExpense ? 'da despesa' : 'da receita'}
           </span>
 
           <div className="flex items-center gap-2">
-            <span className="text-gray-600 text-lg tracking-[-0.5px]">R$ </span>
+            <span className="text-gray-600 text-lg tracking-[-0.5px] dark:text-white">
+              R${' '}
+            </span>
             <Controller
               control={control}
               name="value"

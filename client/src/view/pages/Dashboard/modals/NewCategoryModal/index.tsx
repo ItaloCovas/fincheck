@@ -37,6 +37,7 @@ export function NewCategoryModal() {
               <Input
                 type="file"
                 error={errors.file?.message as string}
+                className="dark:bg-transparent dark:text-white"
                 onChange={(event) => {
                   if (
                     event.target &&
