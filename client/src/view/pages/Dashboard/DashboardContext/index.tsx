@@ -2,6 +2,7 @@ import { createContext, useCallback, useState } from 'react';
 import { BankAccount } from '../../../../shared/entities/bankAccount';
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
+import { useLanguage } from '../../../../shared/hooks/useLanguage';
 
 interface DashboardContextProps {
   areValuesVisible: boolean;
@@ -19,6 +20,8 @@ interface DashboardContextProps {
   newTransactionType: 'INCOME' | 'EXPENSE' | null;
 
   t: TFunction<'translation', undefined>;
+
+  currentLanguage: string;
 
   toggleValueVisibility(): void;
 
@@ -59,6 +62,7 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
   >(null);
 
   const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
 
   const toggleValueVisibility = useCallback(() => {
     setAreValuesVisible((prevState) => !prevState);
@@ -119,7 +123,8 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
         newTransactionType,
         isEditAccountModalOpen,
         accountBeingEdited,
-        t
+        t,
+        currentLanguage
       }}
     >
       {children}

@@ -1,7 +1,9 @@
 {
   "translation": {
+    "expired": "Sua sessão expirou!",
     "currency": "R$",
     "save": "Salvar",
+    "delete": "Excluir",
     "formatCurrency": {
       "country": "pt-br",
       "currency": "BRL"
@@ -36,14 +38,46 @@
       "deleteAccountTitle": "Tem certeza de que deseja excluir sua conta?",
       "deleteAccountDescription": "Ao excluir a conta, também serão excluídos todos os registros de receita e despesa da relacionados a mesma.",
       "confirmDelete": "Sim, desejo excluir",
-      "cancelDelete": "Cancelar"
+      "cancelDelete": "Cancelar",
+      "newAccountTitle": "Nova Conta",
+      "create": "Criar"
+    },
+    "transactions": {
+      "empty": "Não encontramos nenhuma transação!",
+      "editIncome": "Editar Receita",
+      "editExpense": "Editar Despesa",
+      "create": "Criar",
+      "deleteIncomeTitle": "Tem certeza de que deseja excluir esta receita?",
+      "deleteExpenseTitle": "Tem certeza de que deseja excluir esta despesa?",
+      "filtersModal": {
+        "title": "Filtros",
+        "account": "Conta",
+        "year": "Ano",
+        "submit": "Aplicar Filtros"
+      },
+      "dropdown": {
+        "transactions": "Transações",
+        "expenses": "Despesas",
+        "incomes": "Receitas"
+      }
+    },
+    "categories": {
+      "deleteCategoryTitle": "Tem certeza de que deseja excluir esta categoria?"
     },
     "placeholders": {
       "password": "Senha",
       "name": "Nome",
+      "category": "Categoria",
+      "payWith": "Pagar com",
+      "receiveWith": "Receber com",
       "accountName": "Nome da conta",
+      "date": "Data",
       "type": "Tipo",
-      "color": "Cor"
+      "color": "Cor",
+      "incomeName": "Nome da receita",
+      "expenseName": "Nome da despesa",
+      "incomeValue": "Valor da receita",
+      "expenseValue": "Valor da despesa"
     },
     "schemaMessages": {},
     "toastMessages": {
@@ -54,6 +88,28 @@
       "login": {
         "loginSuccess": "Usuário autenticado com sucesso!",
         "loginError": "Credenciais inválidas."
+      },
+      "accounts": {
+        "createAccountSuccess": "Conta cadastrada com sucesso!",
+        "createAccountError": "Erro ao cadastrar a conta.",
+        "editAccountSuccess": "Conta editada com sucesso!",
+        "editAccountError": "Erro ao editar a conta.",
+        "removeAccountSuccess": "Conta deletada com sucesso!",
+        "removeAccountError": "Erro ao deletar a conta."
+      },
+      "transactions": {
+        "createIncomeSuccess": "Receita cadastrada com sucesso!",
+        "createExpenseSuccess": "Despesa cadastrada com sucesso!",
+        "createIncomeError": "Error ao cadastrar receita.",
+        "createExpenseError": "Error ao cadastrar despesa.",
+        "editIncomeSuccess": "Receita editada com sucesso!",
+        "editExpenseSuccess": "Despesa editada com sucesso!",
+        "editIncomeError": "Erro ao salvar receita.",
+        "editExpenseError": "Erro ao salvar despesa.",
+        "removeIncomeSuccess": "Receita deletada com sucesso!",
+        "removeExpenseSuccess": "Despesa deletada com sucesso!",
+        "removeIncomeError": "Erro ao deletar receita.",
+        "removeExpenseError": "Erro ao deletar despesa."
       }
     }
   }

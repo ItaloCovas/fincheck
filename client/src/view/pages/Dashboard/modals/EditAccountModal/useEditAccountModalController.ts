@@ -8,7 +8,6 @@ import { bankAccountsService } from '../../../../../shared/services/bankAccounts
 import { currencyStringToNumber } from '../../../../../shared/utils/currencyStringToNumber';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   initialBalance: z.union([
@@ -23,8 +22,13 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function useEditAccountModalController() {
-  const { isEditAccountModalOpen, closeEditAccountModal, accountBeingEdited } =
-    useDashboard();
+  const {
+    isEditAccountModalOpen,
+    closeEditAccountModal,
+    accountBeingEdited,
+    t,
+    currentLanguage
+  } = useDashboard();
 
   const {
     register,
@@ -40,8 +44,6 @@ export function useEditAccountModalController() {
       initialBalance: accountBeingEdited?.initialBalance.toFixed(2)
     }
   });
-
-  const { t } = useTranslation();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -61,10 +63,10 @@ export function useEditAccountModalController() {
       });
 
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
-      toast.success('Conta editada com sucesso!');
+      toast.success(t('toastMessages.accounts.editAccountSuccess'));
       closeEditAccountModal();
     } catch {
-      toast.error('Erro ao salvar as alterações.');
+      toast.error(t('toastMessages.accounts.editAccountError'));
     }
   });
 
@@ -81,10 +83,10 @@ export function useEditAccountModalController() {
       await removeAccount(accountBeingEdited!.id);
 
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
-      toast.success('Conta deletada com sucesso!');
+      toast.success(t('toastMessages.accounts.deleteAccountSuccess'));
       closeEditAccountModal();
     } catch {
-      toast.error('Erro ao deletar a conta.');
+      toast.error(t('toastMessages.accounts.deleteAccountError'));
     }
   }
 
@@ -102,6 +104,7 @@ export function useEditAccountModalController() {
     handleCloseDeleteModal,
     handleDeleteAccount,
     isLoadingRemove,
-    t
+    t,
+    currentLanguage
   };
 }

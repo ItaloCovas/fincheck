@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useBankAccounts } from '../../../../../../shared/hooks/useBankAccounts';
+import { useTranslation } from 'react-i18next';
 
 export function useFiltersModalController() {
   const [selectedBankAccountId, setSelectedBankAccountId] = useState<
@@ -9,6 +10,7 @@ export function useFiltersModalController() {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   const { accounts } = useBankAccounts();
+  const { t } = useTranslation();
 
   function handleSelectBankAccount(bankAccountId: string) {
     setSelectedBankAccountId((prevState) =>
@@ -25,6 +27,7 @@ export function useFiltersModalController() {
     selectedBankAccountId,
     selectedYear,
     handleChangeYear,
-    accounts
+    accounts,
+    t
   };
 }

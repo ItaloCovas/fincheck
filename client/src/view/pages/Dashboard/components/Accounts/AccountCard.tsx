@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { BankAccount } from '../../../../../shared/entities/bankAccount';
 import { cn } from '../../../../../shared/utils/cn';
 import { formatCurrency } from '../../../../../shared/utils/formatCurrency';
@@ -10,9 +9,7 @@ interface AccountCardProps {
 }
 
 export function AccountCard({ data }: AccountCardProps) {
-  const { areValuesVisible, openEditAccountModal } = useDashboard();
-
-  const { t } = useTranslation();
+  const { areValuesVisible, openEditAccountModal, t } = useDashboard();
 
   const { color, type, currentBalance, name } = data;
 

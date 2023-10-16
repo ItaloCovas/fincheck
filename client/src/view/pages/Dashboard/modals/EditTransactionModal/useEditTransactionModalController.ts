@@ -90,16 +90,16 @@ export function useEditTransactionModalController(
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
       toast.success(
         transaction!.type === 'EXPENSE'
-          ? 'Despesa editada com sucesso.'
-          : 'Receita editada com sucesso.'
+          ? t('toastMessages.transactions.editExpenseSuccess')
+          : t('toastMessages.transactions.editIncomeSuccess')
       );
       onClose();
       reset();
     } catch {
       toast.error(
         transaction!.type === 'EXPENSE'
-          ? 'Erro ao salvar a despesa.'
-          : 'Erro ao salvar a receita.'
+          ? t('toastMessages.transactions.editExpenseError')
+          : t('toastMessages.transactions.editIncomeError')
       );
     }
   });
@@ -119,15 +119,15 @@ export function useEditTransactionModalController(
 
       toast.success(
         transaction!.type === 'EXPENSE'
-          ? 'Despesa deletada com sucesso!'
-          : 'Receita deletada com sucesso!'
+          ? t('toastMessages.transactions.removeExpenseSuccess')
+          : t('toastMessages.transactions.removeIncomeSuccess')
       );
       onClose();
     } catch {
       toast.error(
         transaction!.type === 'EXPENSE'
-          ? 'Erro ao deletar a despesa.'
-          : 'Erro ao deletar a receita.'
+          ? t('toastMessages.transactions.removeExpenseError')
+          : t('toastMessages.transactions.removeIncomeError')
       );
     }
   }

@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { useWindowWidth } from '../../../../../shared/hooks/useWindowWidth';
 import { useDashboard } from '../../DashboardContext/useDashboard';
 import { useBankAccounts } from '../../../../../shared/hooks/useBankAccounts';
-import { useTranslation } from 'react-i18next';
 
 interface SliderProps {
   isBeginning: boolean;
@@ -12,9 +11,8 @@ interface SliderProps {
 
 export function useAccountsController() {
   const windowWidth = useWindowWidth();
-  const { areValuesVisible, toggleValueVisibility, openNewAccountModal } =
+  const { areValuesVisible, toggleValueVisibility, openNewAccountModal, t } =
     useDashboard();
-  const { t } = useTranslation();
 
   const [sliderState, setSliderState] = useState<SliderProps>({
     isBeginning: false,

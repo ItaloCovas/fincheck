@@ -26,7 +26,7 @@ export function DeleteModal({
   t
 }: DeleteModalProps) {
   return (
-    <Modal open title="Excluir" onClose={onClose}>
+    <Modal open title={t('delete')} onClose={onClose}>
       <div className="flex flex-col items-center text-center gap-6">
         <div className="w-[52px] h-[52px] rounded-full bg-red-0 flex items-center justify-center">
           <TrashIcon className="w-6 h-6 text-red-900" />

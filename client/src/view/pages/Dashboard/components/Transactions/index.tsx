@@ -1,7 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { FilterIcon } from '../../../../components/icons/FilterIcon';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { MONTHS } from '../../../../../shared/config/constants/months';
+import {
+  BR_MONTHS,
+  EN_MONTHS
+} from '../../../../../shared/config/constants/months';
 import { SliderOption } from './SliderOption';
 import { SliderNavigation } from './SliderNavigation';
 import { formatCurrency } from '../../../../../shared/utils/formatCurrency';
@@ -32,7 +35,8 @@ export function Transactions() {
     handleOpenEditTransactionsModal,
     isEditTransactionsModalOpen,
     transactionBeingEdited,
-    t
+    t,
+    currentLanguage
   } = useTransactionsController();
 
   const { theme } = useTheme();
@@ -57,6 +61,7 @@ export function Transactions() {
 
             <div className="flex items-center justify-between">
               <TransactionTypeDropdown
+                t={t}
                 onSelect={handleChangeFilters('type')}
                 selectedType={filters.type}
                 theme={theme}
@@ -79,17 +84,29 @@ export function Transactions() {
                 }}
               >
                 <SliderNavigation />
-                {MONTHS.map((month, index) => (
-                  <SwiperSlide key={month}>
-                    {({ isActive }) => (
-                      <SliderOption
-                        isActive={isActive}
-                        month={month}
-                        index={index}
-                      />
-                    )}
-                  </SwiperSlide>
-                ))}
+                {currentLanguage === 'pt'
+                  ? BR_MONTHS.map((month, index) => (
+                      <SwiperSlide key={month}>
+                        {({ isActive }) => (
+                          <SliderOption
+                            isActive={isActive}
+                            month={month}
+                            index={index}
+                          />
+                        )}
+                      </SwiperSlide>
+                    ))
+                  : EN_MONTHS.map((month, index) => (
+                      <SwiperSlide key={month}>
+                        {({ isActive }) => (
+                          <SliderOption
+                            isActive={isActive}
+                            month={month}
+                            index={index}
+                          />
+                        )}
+                      </SwiperSlide>
+                    ))}
               </Swiper>
             </div>
           </header>
@@ -103,9 +120,7 @@ export function Transactions() {
             {!hasTransactions && !isLoading && (
               <div className="flex flex-col items-center justify-center h-full">
                 <img src={emptyState} alt="Empty transactions" />
-                <p className="text-gray-700">
-                  Não encontramos nenhuma transação!
-                </p>
+                <p className="text-gray-700">{t('transactions.empty')}</p>
               </div>
             )}
 

@@ -7,7 +7,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { bankAccountsService } from '../../../../../shared/services/bankAccountsService';
 import { currencyStringToNumber } from '../../../../../shared/utils/currencyStringToNumber';
 import toast from 'react-hot-toast';
-import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   initialBalance: z.string().nonempty('Saldo inicial é obrigatório'),
@@ -19,7 +18,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function useNewAccountModalController() {
-  const { isNewAccountModalOpen, closeNewAccountModal } = useDashboard();
+  const { isNewAccountModalOpen, closeNewAccountModal, t, currentLanguage } =
+    useDashboard();
 
   const {
     register,
@@ -38,7 +38,6 @@ export function useNewAccountModalController() {
   });
 
   const queryClient = useQueryClient();
-  const { t } = useTranslation();
   const { isLoading, mutateAsync } = useMutation(bankAccountsService.create);
 
   const handleSubmit = hookFormSubmit(async (data) => {
@@ -49,11 +48,11 @@ export function useNewAccountModalController() {
       });
 
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
-      toast.success('Conta cadastrada com sucesso!');
+      toast.success(t('toastMessages.accounts.createAccountSuccess'));
       closeNewAccountModal();
       reset();
     } catch {
-      toast.error('Erro ao cadastrar a conta.');
+      toast.error(t('toastMessages.accounts.createAccountError'));
     }
   });
 
@@ -65,6 +64,7 @@ export function useNewAccountModalController() {
     handleSubmit,
     control,
     isLoading,
-    t
+    t,
+    currentLanguage
   };
 }

@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { formatDate } from '../../shared/utils/formatDate';
 import { Popover } from './Popover';
 import { DatePicker } from './DatePicker';
+import { TFunction } from 'i18next';
 
 interface DatePickerInputProps {
+  t: TFunction<'translation', undefined>;
+
   error?: string;
 
   className?: string;
@@ -18,7 +21,8 @@ export function DatePickerInput({
   error,
   className,
   value,
-  onChange
+  onChange,
+  t
 }: DatePickerInputProps) {
   const [selectedDate, setSelectedDate] = useState(value ?? new Date());
 
@@ -40,7 +44,7 @@ export function DatePickerInput({
             )}
           >
             <span className="text-gray-700 text-xs left-[13px] top-2 pointer-events-none absolute">
-              Data
+              {t('placeholders.date')}
             </span>
             <span>{formatDate(selectedDate)}</span>
           </button>

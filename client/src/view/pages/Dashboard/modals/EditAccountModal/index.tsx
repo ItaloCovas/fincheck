@@ -23,7 +23,8 @@ export function EditAccountModal() {
     handleOpenDeleteModal,
     handleDeleteAccount,
     isLoadingRemove,
-    t
+    t,
+    currentLanguage
   } = useEditAccountModalController();
 
   if (isDeleteModalOpen) {
@@ -96,15 +97,19 @@ export function EditAccountModal() {
                 options={[
                   {
                     value: 'CHECKING',
-                    label: 'Conta Corrente'
+                    label:
+                      currentLanguage === 'pt'
+                        ? 'Conta Corrente'
+                        : 'Checking Account'
                   },
                   {
                     value: 'INVESTMENT',
-                    label: 'Investimentos'
+                    label:
+                      currentLanguage === 'pt' ? 'Investimentos' : 'Investments'
                   },
                   {
                     value: 'CASH',
-                    label: 'Dinheiro Físico'
+                    label: currentLanguage === 'pt' ? 'Dinheiro Físico' : 'Cash'
                   }
                 ]}
               />

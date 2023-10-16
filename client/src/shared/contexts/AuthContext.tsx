@@ -5,6 +5,7 @@ import { usersService } from '../services/usersService';
 import toast from 'react-hot-toast';
 import { SplashScreen } from '../../view/components/SplashScreen';
 import { User } from '../entities/user';
+import { useTranslation } from 'react-i18next';
 
 interface AuthContextProps {
   signedIn: boolean;
@@ -24,6 +25,7 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const [signedIn, setSignedIn] = useState<boolean>(() => {
     const storedAccessToken = localStorage.getItem(
@@ -58,7 +60,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     if (isError) {
-      toast.error('Sua sessão expirou!');
+      toast.error(t('expired'));
       signOut();
     }
   }, [isError, signOut]);

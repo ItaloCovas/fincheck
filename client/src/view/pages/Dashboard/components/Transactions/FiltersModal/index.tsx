@@ -25,14 +25,19 @@ export function FiltersModal({
     selectedBankAccountId,
     selectedYear,
     handleChangeYear,
-    accounts
+    accounts,
+    t
   } = useFiltersModalController();
 
   return (
-    <Modal open={open} title="Filtros" onClose={onClose}>
+    <Modal
+      open={open}
+      title={t('transactions.filtersModal.title')}
+      onClose={onClose}
+    >
       <div>
         <span className="text-lg tracking-[-1px] font-bold text-gray-800 dark:text-gray-500">
-          Conta
+          {t('transactions.filtersModal.account')}
         </span>
       </div>
       <div className="space-y-2 mt-2 ">
@@ -54,7 +59,7 @@ export function FiltersModal({
 
       <div className="mt-10">
         <span className="text-lg tracking-[-1px] font-bold text-gray-800 dark:text-gray-500">
-          Ano
+          {t('transactions.filtersModal.year')}
         </span>
       </div>
       <div className="mt-2 w-52 flex items-center justify-between">
@@ -86,7 +91,7 @@ export function FiltersModal({
           })
         }
       >
-        Aplicar Filtros
+        {t('transactions.filtersModal.submit')}
       </Button>
     </Modal>
   );

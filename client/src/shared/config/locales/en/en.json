@@ -1,7 +1,9 @@
 {
   "translation": {
+    "expired": "Your session has expired!",
     "currency": "$",
     "save": "Save",
+    "delete": "Delete",
     "formatCurrency": {
       "country": "en-us",
       "currency": "USD"
@@ -36,14 +38,46 @@
       "deleteAccountTitle": "Are you sure you want to delete your account?",
       "deleteAccountDescription": "When deleting the account, all income and expense records related to it will also be deleted.",
       "confirmDelete": "Yes, I want to delete",
-      "cancelDelete": "Cancel"
+      "cancelDelete": "Cancel",
+      "newAccountTitle": "New Account",
+      "create": "Create"
+    },
+    "transactions": {
+      "empty": "We did not find any transactions!",
+      "editIncome": "Edit Income",
+      "editExpense": "Edit Expense",
+      "create": "Create",
+      "deleteIncomeTitle": "Are you sure you want to delete this income?",
+      "deleteExpenseTitle": "Are you sure you want to delete this expense?",
+      "filtersModal": {
+        "title": "Filters",
+        "account": "Account",
+        "year": "Year",
+        "submit": "Apply Filters"
+      },
+      "dropdown": {
+        "transactions": "Transactions",
+        "expenses": "Expenses",
+        "incomes": "Incomes"
+      }
+    },
+    "categories": {
+      "deleteCategoryTitle": "Are you sure you want to delete this category?"
     },
     "placeholders": {
       "password": "Password",
       "name": "Name",
+      "category": "Category",
+      "payWith": "Pay with",
+      "receiveWith": "Receive with",
       "accountName": "Account name",
+      "date": "Date",
       "type": "Type",
-      "color": "Color"
+      "color": "Color",
+      "incomeName": "Income name",
+      "expenseName": "Expense name",
+      "incomeValue": "Income value",
+      "expenseValue": "Expense value"
     },
     "schemaMessages": {},
     "toastMessages": {
@@ -54,6 +88,28 @@
       "login": {
         "loginSuccess": "User successfully authenticated!",
         "loginError": "Invalid credentials."
+      },
+      "accounts": {
+        "createAccountSuccess": "Account registered successfully!",
+        "createAccountError": "Error when registering account.",
+        "editAccountSuccess": "Account edited successfully!",
+        "editAccountError": "Error saving changes.",
+        "removeAccountSuccess": "Account deleted successfully!",
+        "removeAccountError": "Error when deleting account."
+      },
+      "transactions": {
+        "createIncomeSuccess": "Income registered successfully!",
+        "createExpenseSuccess": "Expense registered successfully!",
+        "createIncomeError": "Error when registering income.",
+        "createExpenseError": "Error when registering expense.",
+        "editIncomeSuccess": "Income edited successfully!",
+        "editExpenseSuccess": "Expense edited successfully!",
+        "editIncomeError": "Error saving income.",
+        "editExpenseError": "Error saving expense.",
+        "removeIncomeSuccess": "Income deleted successfully!",
+        "removeExpenseSuccess": "Expense deleted successfully!",
+        "removeIncomeError": "Error when deleting income.",
+        "removeExpenseError": "Error when deleting expense."
       }
     }
   }

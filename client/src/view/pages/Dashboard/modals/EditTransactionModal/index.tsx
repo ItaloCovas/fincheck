@@ -54,9 +54,12 @@ export function EditTransactionModal({
   if (isDeleteModalOpen) {
     return (
       <DeleteModal
-        title={`Tem certeza de que deseja excluir esta ${
-          isExpense ? 'despesa' : 'receita'
-        }?`}
+        t={t}
+        title={` ${
+          isExpense
+            ? t('transactions.deleteExpenseTitle')
+            : t('transactions.deleteIncomeTitle')
+        }`}
         isLoading={isLoadingRemove}
         onConfirm={handleDeleteTransaction}
         onClose={handleCloseDeleteModal}
@@ -67,7 +70,8 @@ export function EditTransactionModal({
   if (isDeleteCategoryModalOpen) {
     return (
       <DeleteModal
-        title="Tem certeza de que deseja excluir esta categoria?"
+        t={t}
+        title={t('categories.deleteCategoryTitle')}
         isLoading={isLoadingCategoryRemove}
         onConfirm={handleDeleteCategory}
         onClose={handleCloseDeleteCategoryModal}
@@ -87,7 +91,9 @@ export function EditTransactionModal({
 
   return (
     <Modal
-      title={isExpense ? 'Editar Despesa' : 'Editar Receita'}
+      title={
+        isExpense ? t('transactions.editExpense') : t('transactions.editIncome')
+      }
       open={isModalOpen}
       onClose={onClose}
       rightAction={
@@ -99,7 +105,9 @@ export function EditTransactionModal({
       <form onSubmit={handleSubmit}>
         <div>
           <span className="text-gray-600 text-sm tracking-[-0.5px] dark:text-white">
-            Valor {isExpense ? 'da despesa' : 'da receita'}
+            {isExpense
+              ? t('placeholders.expenseValue')
+              : t('placeholders.incomeValue')}
           </span>
 
           <div className="flex items-center gap-2">
@@ -124,7 +132,11 @@ export function EditTransactionModal({
         <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
-            placeholder={isExpense ? 'Nome da despesa' : 'Nome da Receita'}
+            placeholder={
+              isExpense
+                ? t('placeholders.expenseName')
+                : t('placeholders.incomeName')
+            }
             {...register('name')}
             error={errors.name?.message}
           />
@@ -135,7 +147,7 @@ export function EditTransactionModal({
             render={({ field: { onChange, value } }) => (
               <Select
                 onChange={onChange}
-                placeholder="Categoria"
+                placeholder={t('placeholders.category')}
                 isCategory
                 handleOpenEditCategoriesModal={handleOpenEditCategoriesModal}
                 handleOpenRemoveCategoriesModal={handleOpenDeleteCategoryModal}
@@ -158,7 +170,11 @@ export function EditTransactionModal({
                 onChange={onChange}
                 value={value}
                 error={errors.bankAccountId?.message}
-                placeholder={isExpense ? 'Pagar com' : 'Receber com'}
+                placeholder={
+                  isExpense
+                    ? t('placeholders.payWith')
+                    : t('placeholders.receiveWith')
+                }
                 options={accounts.map((account) => ({
                   value: account.id,
                   label: account.name
@@ -172,6 +188,7 @@ export function EditTransactionModal({
             defaultValue={new Date()}
             render={({ field: { onChange, value } }) => (
               <DatePickerInput
+                t={t}
                 value={value}
                 onChange={onChange}
                 error={errors.date?.message}
@@ -180,7 +197,7 @@ export function EditTransactionModal({
           />
         </div>
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Salvar
+          {t('save')}
         </Button>
       </form>
     </Modal>

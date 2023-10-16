@@ -4,11 +4,10 @@ import { useTransactions } from '../../../../../shared/hooks/useTransactions';
 import { TransactionsFilters } from '../../../../../shared/services/transactionsService/getAll';
 import { Transaction } from '../../../../../shared/entities/transaction';
 import { useCategories } from '../../../../../shared/hooks/useCategories';
-import { useTranslation } from 'react-i18next';
 
 export function useTransactionsController() {
-  const { areValuesVisible, toggleValueVisibility } = useDashboard();
-  const { t } = useTranslation();
+  const { areValuesVisible, toggleValueVisibility, t, currentLanguage } =
+    useDashboard();
 
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
 
@@ -93,6 +92,7 @@ export function useTransactionsController() {
     handleOpenEditTransactionsModal,
     handleCloseEditTransactionsModal,
     categories,
-    t
+    t,
+    currentLanguage
   };
 }

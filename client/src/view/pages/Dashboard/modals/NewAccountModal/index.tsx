@@ -16,19 +16,20 @@ export function NewAccountModal() {
     register,
     control,
     isLoading,
-    t
+    t,
+    currentLanguage
   } = useNewAccountModalController();
 
   return (
     <Modal
-      title="Nova Conta"
+      title={t('accounts.newAccountTitle')}
       open={isNewAccountModalOpen}
       onClose={closeNewAccountModal}
     >
       <form onSubmit={handleSubmit}>
         <div>
           <span className="text-gray-600 tracking-[-0.5px] text-xs dark:text-white">
-            Saldo inicial
+            {t('accounts.initialBalance')}
           </span>
           <div className="flex items-center gap-2">
             <span className="text-gray-600 tracking-[-0.5px] text-lg dark:text-white">
@@ -53,7 +54,7 @@ export function NewAccountModal() {
         <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
-            placeholder="Nome da Conta"
+            placeholder={t('placeholders.accountName')}
             error={errors.name?.message}
             {...register('name')}
           />
@@ -64,22 +65,26 @@ export function NewAccountModal() {
             defaultValue="CHECKING"
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder="Tipo"
+                placeholder={t('placeholders.type')}
                 error={errors.type?.message}
                 onChange={onChange}
                 value={value}
                 options={[
                   {
                     value: 'CHECKING',
-                    label: 'Conta Corrente'
+                    label:
+                      currentLanguage === 'pt'
+                        ? 'Conta Corrente'
+                        : 'Checking Account'
                   },
                   {
                     value: 'INVESTMENT',
-                    label: 'Investimentos'
+                    label:
+                      currentLanguage === 'pt' ? 'Investimentos' : 'Investments'
                   },
                   {
                     value: 'CASH',
-                    label: 'Dinheiro Físico'
+                    label: currentLanguage === 'pt' ? 'Dinheiro Físico' : 'Cash'
                   }
                 ]}
               />
@@ -92,6 +97,7 @@ export function NewAccountModal() {
             defaultValue=""
             render={({ field: { onChange, value } }) => (
               <ColorsDropdownInput
+                t={t}
                 error={errors.color?.message}
                 onChange={onChange}
                 value={value}
@@ -101,7 +107,7 @@ export function NewAccountModal() {
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Criar
+          {t('accounts.create')}
         </Button>
       </form>
     </Modal>

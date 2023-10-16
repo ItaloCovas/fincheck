@@ -9,7 +9,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { transactionsService } from '../../../../../shared/services/transactionsService';
 import toast from 'react-hot-toast';
 import { currencyStringToNumber } from '../../../../../shared/utils/currencyStringToNumber';
-import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   value: z.string().nonempty('Valor é obrigatório'),
@@ -25,7 +24,8 @@ export function useNewTransactionModalController() {
   const {
     isNewTransactionModalOpen,
     closeNewTransactionModal,
-    newTransactionType
+    newTransactionType,
+    t
   } = useDashboard();
 
   const {
@@ -44,7 +44,6 @@ export function useNewTransactionModalController() {
   });
 
   const queryClient = useQueryClient();
-  const { t } = useTranslation();
   const { accounts } = useBankAccounts();
   const { categories: categoriesList } = useCategories();
   const { isLoading, mutateAsync } = useMutation(transactionsService.create);
@@ -62,16 +61,16 @@ export function useNewTransactionModalController() {
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
       toast.success(
         newTransactionType === 'EXPENSE'
-          ? 'Despesa cadastrada com sucesso.'
-          : 'Receita cadastrada com sucesso.'
+          ? t('toastMessages.transactions.createExpenseSuccess')
+          : t('toastMessages.transactions.createIncomeSuccess')
       );
       closeNewTransactionModal();
       reset();
     } catch {
       toast.error(
         newTransactionType === 'EXPENSE'
-          ? 'Erro ao cadastrar a despesa.'
-          : 'Erro ao cadastrar a receita.'
+          ? t('toastMessages.transactions.createExpenseError')
+          : t('toastMessages.transactions.createIncomeError')
       );
     }
   });
