@@ -4,22 +4,23 @@ import { Button } from '../../components/Button';
 import { useLoginController } from './useLoginController';
 
 export function Login() {
-  const { handleSubmit, register, errors, isLoading } = useLoginController();
+  const { handleSubmit, register, errors, isLoading, t } = useLoginController();
+
   return (
     <>
       <header className="flex flex-col items-center gap-4 text-center">
         <h1 className="text-2xl text-gray-900 font-bold tracking-[-1px] dark:text-white">
-          Entre em sua conta
+          {t('login.loginTitle')}
         </h1>
         <p className="space-x-2">
           <span className="text-gray-700 tracking-[-0.5px] dark:text-gray-500">
-            Novo por aqui?
+            {t('login.loginSuggestion')}
           </span>
           <Link
             to="/register"
             className="text-teal-900 font-medium tracking-[-0.5px]"
           >
-            Crie uma conta
+            {t('login.createAccountSuggestion')}
           </Link>
         </p>
       </header>
@@ -33,13 +34,13 @@ export function Login() {
         />
         <Input
           type="password"
-          placeholder="Senha"
+          placeholder={t('placeholders.password')}
           error={errors.password?.message}
           {...register('password')}
         />
 
         <Button type="submit" className="mt-2" isLoading={isLoading}>
-          Entrar
+          {t('login.loginButton')}
         </Button>
       </form>
     </>

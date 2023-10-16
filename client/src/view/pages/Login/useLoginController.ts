@@ -6,6 +6,7 @@ import { SignInParams } from '../../../shared/services/authService/signin';
 import toast from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
 import { useAuth } from '../../../shared/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   email: z
@@ -29,6 +30,8 @@ export function useLoginController() {
     resolver: zodResolver(schema)
   });
 
+  const { t } = useTranslation();
+
   const { mutateAsync, isLoading } = useMutation({
     mutationKey: ['signup'],
     mutationFn: async (data: SignInParams) => {
@@ -45,12 +48,12 @@ export function useLoginController() {
 
       signIn(accessToken);
       setTimeout(() => {
-        toast.success('Usuário autenticado com sucesso!');
+        toast.success(t('toastMessages.login.loginSuccess'));
       }, 100);
     } catch {
-      toast.error('Credenciais inválidas.');
+      toast.error(t('toastMessages.login.loginError'));
     }
   });
 
-  return { handleSubmit, register, errors, isLoading };
+  return { handleSubmit, register, errors, isLoading, t };
 }

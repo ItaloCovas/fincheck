@@ -1,0 +1,32 @@
+{
+  "translation": {
+    "welcomeText": "Manage your personal finances in a simple way with fincheck, and best of all, it's completely free!",
+    "login": {
+      "loginTitle": "Sign in to your account",
+      "loginSuggestion": "New here?",
+      "createAccountSuggestion": "Create an account",
+      "loginButton": "Sign in"
+    },
+    "register": {
+      "registerTitle": "Create your account",
+      "registerSuggestion": "Already have an account?",
+      "createAccountSuggestion": "Sign in",
+      "registerButton": "Register"
+    },
+    "placeholders": {
+      "password": "Password",
+      "name": "Name"
+    },
+    "schemaMessages": {},
+    "toastMessages": {
+      "register": {
+        "userCreated": "User created with success!",
+        "userCreatedError": "An error occurred while creating your account."
+      },
+      "login": {
+        "loginSuccess": "User successfully authenticated!",
+        "loginError": "Invalid credentials."
+      }
+    }
+  }
+}

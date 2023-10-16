@@ -1,0 +1,32 @@
+{
+  "translation": {
+    "welcomeText": "Gerencie suas finanças pessoais de uma forma simples com o fincheck, e o melhor, totalmente de graça!",
+    "login": {
+      "loginTitle": "Entre em sua conta",
+      "loginSuggestion": "Novo por aqui?",
+      "createAccountSuggestion": "Crie uma conta",
+      "loginButton": "Entrar"
+    },
+    "register": {
+      "registerTitle": "Crie sua conta",
+      "registerSuggestion": "Já possui uma conta?",
+      "createAccountSuggestion": "Fazer login",
+      "registerButton": "Criar conta"
+    },
+    "placeholders": {
+      "password": "Senha",
+      "name": "Nome"
+    },
+    "schemaMessages": {},
+    "toastMessages": {
+      "register": {
+        "userCreated": "Usuário criado com sucesso!",
+        "userCreatedError": "Ocorreu um erro ao criar a sua conta."
+      },
+      "login": {
+        "loginSuccess": "Usuário autenticado com sucesso!",
+        "loginError": "Credenciais inválidas."
+      }
+    }
+  }
+}
