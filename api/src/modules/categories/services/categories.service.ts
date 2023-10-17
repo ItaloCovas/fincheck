@@ -40,7 +40,7 @@ export class CategoriesService {
       data: {
         userId,
         name,
-        icon: iconImg.fieldname,
+        icon: iconImg.originalname.split('.')[0],
         iconKey: iconImg.key,
         iconUrl: iconImg.location,
         type,
