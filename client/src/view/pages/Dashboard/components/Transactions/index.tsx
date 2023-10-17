@@ -120,7 +120,9 @@ export function Transactions() {
             {!hasTransactions && !isLoading && (
               <div className="flex flex-col items-center justify-center h-full">
                 <img src={emptyState} alt="Empty transactions" />
-                <p className="text-gray-700">{t('transactions.empty')}</p>
+                <p className="text-gray-700 dark:text-white">
+                  {t('transactions.empty')}
+                </p>
               </div>
             )}
 

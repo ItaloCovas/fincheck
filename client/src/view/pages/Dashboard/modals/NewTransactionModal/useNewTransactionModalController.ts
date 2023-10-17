@@ -4,11 +4,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useBankAccounts } from '../../../../../shared/hooks/useBankAccounts';
 import { useCategories } from '../../../../../shared/hooks/useCategories';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { transactionsService } from '../../../../../shared/services/transactionsService';
 import toast from 'react-hot-toast';
 import { currencyStringToNumber } from '../../../../../shared/utils/currencyStringToNumber';
+import { Category } from '../../../../../shared/entities/category';
+import { categoriesService } from '../../../../../shared/services/categoriesService';
 
 const schema = z.object({
   value: z.string().nonempty('Valor é obrigatório'),
@@ -47,6 +49,21 @@ export function useNewTransactionModalController() {
   const { accounts } = useBankAccounts();
   const { categories: categoriesList } = useCategories();
   const { isLoading, mutateAsync } = useMutation(transactionsService.create);
+  const { isLoading: isLoadingCategoryRemove, mutateAsync: removeCategory } =
+    useMutation(categoriesService.remove);
+
+  const [isDeleteCategoryModalOpen, setIsDeleteCategoryModalOpen] =
+    useState(false);
+
+  const [isEditCategoriesModalOpen, setIsEditCategoriesModalOpen] =
+    useState(false);
+
+  const [categoryBeingDeleted, setCategoryBeingDeleted] = useState<
+    null | string
+  >(null);
+
+  const [categoryBeingEdited, setCategoryBeingEdited] =
+    useState<null | Category>(null);
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
@@ -74,6 +91,40 @@ export function useNewTransactionModalController() {
       );
     }
   });
+
+  async function handleDeleteCategory() {
+    try {
+      await removeCategory(categoryBeingDeleted!);
+
+      queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+
+      toast.success(t('toastMessages.categories.deleteCategorySuccess'));
+      closeNewTransactionModal();
+    } catch {
+      toast.error(t('toastMessages.categories.deleteCategoryError'));
+    }
+  }
+
+  function handleOpenDeleteCategoryModal(categoryId: string) {
+    setIsDeleteCategoryModalOpen(true);
+    setCategoryBeingDeleted(categoryId);
+  }
+
+  function handleCloseDeleteCategoryModal() {
+    setIsDeleteCategoryModalOpen(false);
+  }
+
+  function handleOpenEditCategoriesModal(category: Category) {
+    setIsEditCategoriesModalOpen(true);
+    setCategoryBeingEdited(category);
+  }
+
+  function handleCloseEditCategoriesModal() {
+    setIsEditCategoriesModalOpen(false);
+    setCategoryBeingEdited(null);
+  }
+
   const categories = useMemo(() => {
     return categoriesList.filter(
       (category) => category.type === newTransactionType
@@ -92,6 +143,15 @@ export function useNewTransactionModalController() {
     categories,
     isLoading,
     reset,
-    t
+    t,
+    handleOpenDeleteCategoryModal,
+    handleCloseEditCategoriesModal,
+    handleOpenEditCategoriesModal,
+    isLoadingCategoryRemove,
+    handleDeleteCategory,
+    categoryBeingEdited,
+    isDeleteCategoryModalOpen,
+    isEditCategoriesModalOpen,
+    handleCloseDeleteCategoryModal
   };
 }

@@ -57,6 +57,8 @@ export function Select({
     'Roupas',
     'Transporte',
     'Viagem',
+    'Salário',
+    'Freelance',
     'Outro'
   ];
 

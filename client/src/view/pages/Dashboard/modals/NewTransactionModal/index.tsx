@@ -6,6 +6,8 @@ import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import { useNewTransactionModalController } from './useNewTransactionModalController';
 import { Button } from '../../../../components/Button';
+import { DeleteModal } from '../../../../components/DeleteModal';
+import { EditCategoryModal } from '../EditCategoryModal';
 
 export function NewTransactionModal() {
   const {
@@ -19,10 +21,41 @@ export function NewTransactionModal() {
     accounts,
     categories,
     isLoading,
-    t
+    t,
+    isDeleteCategoryModalOpen,
+    isLoadingCategoryRemove,
+    handleDeleteCategory,
+    handleCloseDeleteCategoryModal,
+    categoryBeingEdited,
+    isEditCategoriesModalOpen,
+    handleOpenEditCategoriesModal,
+    handleCloseEditCategoriesModal,
+    handleOpenDeleteCategoryModal
   } = useNewTransactionModalController();
 
   const isExpense = newTransactionType === 'EXPENSE';
+
+  if (isDeleteCategoryModalOpen) {
+    return (
+      <DeleteModal
+        t={t}
+        title={t('categories.deleteCategoryTitle')}
+        isLoading={isLoadingCategoryRemove}
+        onConfirm={handleDeleteCategory}
+        onClose={handleCloseDeleteCategoryModal}
+      />
+    );
+  }
+
+  if (categoryBeingEdited) {
+    return (
+      <EditCategoryModal
+        isModalOpen={isEditCategoriesModalOpen}
+        onClose={handleCloseEditCategoriesModal}
+        category={categoryBeingEdited}
+      />
+    );
+  }
 
   return (
     <Modal
@@ -77,6 +110,8 @@ export function NewTransactionModal() {
                 onChange={onChange}
                 placeholder={t('placeholders.category')}
                 isCategory
+                handleOpenEditCategoriesModal={handleOpenEditCategoriesModal}
+                handleOpenRemoveCategoriesModal={handleOpenDeleteCategoryModal}
                 value={value}
                 error={errors.categoryId?.message}
                 options={categories.map((category) => ({
