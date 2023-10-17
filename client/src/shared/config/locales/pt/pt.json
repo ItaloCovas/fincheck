@@ -62,7 +62,10 @@
       }
     },
     "categories": {
-      "deleteCategoryTitle": "Tem certeza de que deseja excluir esta categoria?"
+      "newCategoryTitle": "Nova Categoria",
+      "deleteCategoryTitle": "Tem certeza de que deseja excluir esta categoria?",
+      "editCategoryTitle": "Editar Categoria",
+      "createCategory": "Criar"
     },
     "placeholders": {
       "password": "Senha",
@@ -77,7 +80,8 @@
       "incomeName": "Nome da receita",
       "expenseName": "Nome da despesa",
       "incomeValue": "Valor da receita",
-      "expenseValue": "Valor da despesa"
+      "expenseValue": "Valor da despesa",
+      "categoryName": "Nome da categoria"
     },
     "schemaMessages": {},
     "toastMessages": {
@@ -110,6 +114,14 @@
         "removeExpenseSuccess": "Despesa deletada com sucesso!",
         "removeIncomeError": "Erro ao deletar receita.",
         "removeExpenseError": "Erro ao deletar despesa."
+      },
+      "categories": {
+        "createCategorySuccess": "Categoria criada com sucesso!",
+        "createCategoryError": "Erro ao criar categoria.",
+        "deleteCategorySuccess": "Categoria deletada com sucesso!",
+        "deleteCategoryError": "Erro ao deletar categoria.",
+        "editCategorySuccess": "Categoria editada com sucesso!",
+        "editCategoryError": "Erro ao editar categoria."
       }
     }
   }

@@ -139,10 +139,10 @@ export function useEditTransactionModalController(
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
       queryClient.invalidateQueries({ queryKey: ['categories'] });
 
-      toast.success('Categoria deletada com sucesso!');
+      toast.success(t('toastMessages.categories.deleteCategorySuccess'));
       onClose();
     } catch {
-      toast.error('Erro ao deletar a categoria.');
+      toast.error(t('toastMessages.categories.deleteCategoryError'));
     }
   }
 

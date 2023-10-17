@@ -35,7 +35,7 @@ export function useEditCategoryModalController(
   category: Category | null,
   onClose: () => void
 ) {
-  const { isNewCategoryModalOpen, closeNewCategoryModal } = useDashboard();
+  const { isNewCategoryModalOpen, closeNewCategoryModal, t } = useDashboard();
 
   const {
     register,
@@ -69,11 +69,11 @@ export function useEditCategoryModalController(
       await updateCategory(updateFormData);
       queryClient.invalidateQueries({ queryKey: ['categories'] });
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
-      toast.success('Categoria editada com sucesso!');
+      toast.success(t('toastMessages.categories.editCategorySuccess'));
       onClose();
       reset();
     } catch {
-      toast.error('Erro ao editar a categoria.');
+      toast.error(t('toastMessages.categories.editCategoryError'));
     }
     reset();
   });
@@ -86,6 +86,7 @@ export function useEditCategoryModalController(
     control,
     handleSubmit,
     isLoading,
-    reset
+    reset,
+    t
   };
 }

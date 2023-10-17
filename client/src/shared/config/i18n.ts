@@ -12,6 +12,5 @@ i18n
     resources: {
       pt: { ...ptJSON },
       en: { ...enJSON }
-    },
-    lng: 'pt'
+    }
   });

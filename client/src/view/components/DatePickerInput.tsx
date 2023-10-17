@@ -46,7 +46,7 @@ export function DatePickerInput({
             <span className="text-gray-700 text-xs left-[13px] top-2 pointer-events-none absolute">
               {t('placeholders.date')}
             </span>
-            <span>{formatDate(selectedDate)}</span>
+            <span>{formatDate(selectedDate, t)}</span>
           </button>
         </Popover.Trigger>
 

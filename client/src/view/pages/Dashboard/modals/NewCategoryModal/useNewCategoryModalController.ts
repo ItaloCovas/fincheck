@@ -31,7 +31,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function useNewCategoryModalController() {
-  const { isNewCategoryModalOpen, closeNewCategoryModal } = useDashboard();
+  const { isNewCategoryModalOpen, closeNewCategoryModal, t } = useDashboard();
 
   const {
     register,
@@ -63,11 +63,11 @@ export function useNewCategoryModalController() {
       await mutateAsync(formData);
 
       queryClient.invalidateQueries({ queryKey: ['categories'] });
-      toast.success('Categoria cadastrada com sucesso!');
+      toast.success(t('toastMessages.categories.createCategorySuccess'));
       closeNewCategoryModal();
       reset();
     } catch {
-      toast.error('Erro ao cadastrar a categoria.');
+      toast.error(t('toastMessages.categories.createCategoryError'));
     }
     reset();
   });
@@ -80,6 +80,7 @@ export function useNewCategoryModalController() {
     control,
     handleSubmit,
     isLoading,
-    reset
+    reset,
+    t
   };
 }

@@ -19,16 +19,20 @@ export function EditCategoryModal({
   onClose,
   category
 }: EditCategoryModalProps) {
-  const { control, handleSubmit, errors, register, isLoading } =
+  const { control, handleSubmit, errors, register, isLoading, t } =
     useEditCategoryModalController(category, onClose);
 
   return (
-    <Modal title="Editar Categoria" open={isModalOpen} onClose={onClose}>
+    <Modal
+      title={t('categories.editCategoryTitle')}
+      open={isModalOpen}
+      onClose={onClose}
+    >
       <form onSubmit={handleSubmit}>
         <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
-            placeholder="Nome da categoria"
+            placeholder={t('placeholders.categoryName')}
             {...register('name')}
             error={errors.name?.message}
           />
@@ -58,7 +62,7 @@ export function EditCategoryModal({
             defaultValue="INCOME"
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder="Tipo"
+                placeholder={t('placeholders.type')}
                 error={errors.type?.message}
                 onChange={onChange}
                 value={value}
@@ -77,7 +81,7 @@ export function EditCategoryModal({
           />
         </div>
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Salvar
+          {t('save')}
         </Button>
       </form>
     </Modal>

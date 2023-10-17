@@ -159,7 +159,7 @@ export function Transactions() {
                             {transaction.name}
                           </strong>
                           <span className="text-sm text-gray-600 dark:text-gray-800">
-                            {formatDate(new Date(transaction.date))}
+                            {formatDate(new Date(transaction.date), t)}
                           </span>
                         </div>
                       </div>

@@ -13,12 +13,13 @@ export function NewCategoryModal() {
     register,
     isLoading,
     isNewCategoryModalOpen,
-    closeNewCategoryModal
+    closeNewCategoryModal,
+    t
   } = useNewCategoryModalController();
 
   return (
     <Modal
-      title="Nova Categoria"
+      title={t('categories.newCategoryTitle')}
       open={isNewCategoryModalOpen}
       onClose={closeNewCategoryModal}
     >
@@ -26,7 +27,7 @@ export function NewCategoryModal() {
         <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
-            placeholder="Nome da categoria"
+            placeholder={t('placeholders.categoryName')}
             {...register('name')}
             error={errors.name?.message}
           />
@@ -56,7 +57,7 @@ export function NewCategoryModal() {
             defaultValue="INCOME"
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder="Tipo"
+                placeholder={t('placeholders.type')}
                 error={errors.type?.message}
                 onChange={onChange}
                 value={value}
@@ -75,7 +76,7 @@ export function NewCategoryModal() {
           />
         </div>
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Criar
+          {t('categories.createCategory')}
         </Button>
       </form>
     </Modal>
